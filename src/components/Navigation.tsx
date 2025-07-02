@@ -49,19 +49,19 @@ const Navigation = () => {
 
   const activeIndex = Menus.findIndex((menu) => menu.href === pathname);
 
-  const [active, setActive] = useState(0);
+ // const [active, setActive] = useState(0);
   const [spanLeft, setSpanLeft] = useState("");
 
   useEffect(() => {
     if (activeIndex !== -1) {
-      setActive(activeIndex);
+      // setActive(activeIndex);
       setSpanLeft(
         `calc(${(activeIndex + 0.5) * (100 / Menus.length)}% - 2rem)`
       );
     } else {
       setSpanLeft("unset");
     }
-  }, [activeIndex]);
+  }, [activeIndex, Menus.length]);
 
   return (
     <div className="dark:bg-gray-800 bg-white shadow-2xl px-6 pb-1 rounded-t-3xl z-50 flex justify-between items-center text-black dark:text-white lg:hidden bottom-0 mt-10 w-full fixed">
@@ -77,9 +77,10 @@ const Navigation = () => {
           <li
             key={menu.label}
             className="flex flex-col items-center pt-6 relative w-full cursor-pointer"
-            onClick={() => {
-              if (!menu.disabled) setActive(index);
-            }}>
+            // onClick={() => {
+            //   if (!menu.disabled) setActive(index);
+          // }}
+          >
            
             <Link
               href={menu.disabled ? "#" : menu.href}

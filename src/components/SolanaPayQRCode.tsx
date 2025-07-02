@@ -70,7 +70,7 @@ export const SolanaPayQRCode: FC<SolanaPayQRCodeProps> = ({
         setConfirmed(true);
         onConfirmed?.();
         clearInterval(interval);
-      } catch (_) {
+      } catch  {
         // Not confirmed yet
       }
     }, 2000);

@@ -70,16 +70,13 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
       await getMe();
       toast.success("Login Successful.");
       
-    } catch (err: any) {
-      if (err.message) {
-        setError(err.message); // From res.json({ message: "..." })
-      } else {
-        setError("Something went wrong. Please try again.");
-      }
-      // setError(err.message || "Sign up failed.");
-      // console.log(err.message)
+    }  catch (err: unknown) {
+      const errorMsg =
+        err instanceof Error ? err.message : "Sign up failed. Please try again.";
+      setError(errorMsg);
       toast.error("Sign Up Failed");
     }
+    
   };
 
  const handleGoogle = async () => {

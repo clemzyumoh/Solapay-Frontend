@@ -38,7 +38,19 @@ export default function AuthWrapper({
           <div className="absolute inset-0 flex items-center justify-center">
             {/* <Image src={Logo} alt="Logo" className="w-10 h-10" /> */}
             <div className="flex items-end-safe justify-items-end-safe">
-              <img src="/logo4.svg" alt="ppicture of logo" className=" w-12 h-12" />
+              {/* <img
+                src="/logo4.svg"
+                alt="ppicture of logo"
+                className=" w-12 h-12"
+              /> */}
+              
+              <Image
+                src="/logo4.svg"
+                alt="logo"
+                width={48}
+                height={48}
+                className="w-12 h-12"
+              />
               {/* <Image
                 src="/logo4.svg"
                 alt="Picture of the logo"

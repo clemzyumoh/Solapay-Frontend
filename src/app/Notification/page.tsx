@@ -98,7 +98,7 @@ export default function NotificationsPage() {
                         );
 
                         // Remove from notifications list
-                        setNotifications((prev: any[]) =>
+                        setNotifications((prev: Notifications[]) =>
                           prev.filter((n) => n._id !== notif._id)
                         );
                       }}
@@ -114,7 +114,7 @@ export default function NotificationsPage() {
                     <div className="flex justify-between items-center w-[40%]  md:w-1/3 md:mr-0 h-full overflow-hidden">
                       {avatarUrl ? (
                         <div className="rounded-full border-[#14f195] border-2 w-12 h-12 ">
-                          <img
+                          <Image
                             src={avatarUrl}
                             alt="avatar"
                             className="w-full h-full rounded-full object-cover"

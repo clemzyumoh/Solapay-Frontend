@@ -22,12 +22,12 @@ const apiRequest = async ({
   url,
   method = "GET",
   data = null,
-  
+
   headers = {},
 }: {
   url: string;
   method?: "GET" | "POST" | "PUT" | "DELETE";
-  data?: any;
+  data?: unknown; // ✅ safest generic alternative
   headers?: Record<string, string>;
 }) => {
   try {
@@ -44,11 +44,11 @@ const apiRequest = async ({
     });
 
     return response.data;
-  } catch (error: any) {
-    //throw error.response ? error.response.data : error.message;
-    // 👇 This ensures the error message comes from backend response
-    const message = error?.response?.data?.message || "Unexpected error occurred.";
-    throw new Error(message); // 👈 this lets err.message work correctly
+  } catch (error: unknown) {
+    const err = error as { response?: { data?: { message?: string } } };
+    const message =
+      err?.response?.data?.message || "Unexpected error occurred.";
+    throw new Error(message);
   }
 };
 
@@ -68,7 +68,10 @@ export const registerUser = async (data: {
   
 
 // POST - Login user
-export const loginUser = async (credentials: any) => {
+export const loginUser = async (credentials: {
+  email: string;
+  password: string;
+}) => {
   return apiRequest({
     url: "/login",
     method: "POST",

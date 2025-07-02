@@ -1,5 +1,4 @@
 // cloudinary.ts
-import axios from "axios";
 
 
 

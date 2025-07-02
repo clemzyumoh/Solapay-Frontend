@@ -25,12 +25,12 @@ export const useWalletBalance = () => {
   const [totalUsd, setTotalUsd] = useState(0);
   const [prices, setPrices] = useState({ sol: 0, usdc: 1 });
 
-  const getNetwork = () => {
-    const endpoint = connection.rpcEndpoint;
-    if (endpoint.includes("devnet")) return "devnet";
-    if (endpoint.includes("testnet")) return "testnet";
-    return "mainnet";
-  };
+  // const getNetwork = () => {
+  //   const endpoint = connection.rpcEndpoint;
+  //   if (endpoint.includes("devnet")) return "devnet";
+  //   if (endpoint.includes("testnet")) return "testnet";
+  //   return "mainnet";
+  // };
 
   useEffect(() => {
     const fetchPrices = async () => {
@@ -52,22 +52,58 @@ export const useWalletBalance = () => {
     fetchPrices();
   }, []);
 
+  // useEffect(() => {
+  //   if (!publicKey) return;
+  //   const fetchBalances = async () => {
+  //     try {
+  //       const sol = await connection.getBalance(publicKey);
+  //       //setSolBalance(sol / LAMPORTS_PER_SOL);
+  //       setSolBalance(Number((sol / LAMPORTS_PER_SOL).toFixed(3)));
+
+  //       const network = getNetwork();
+  //       const usdcMint = new PublicKey(USDC_MINTS[network]);
+
+  //       const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
+  //         publicKey,
+  //         {
+  //           mint: usdcMint,
+  //         }
+  //       );
+
+  //       if (tokenAccounts.value.length > 0) {
+  //         const amount =
+  //           tokenAccounts.value[0].account.data.parsed.info.tokenAmount
+  //             .uiAmount || 0;
+  //         setUsdcBalance(Number(amount.toFixed(2)));
+  //       } else {
+  //         setUsdcBalance(0); // No USDC token account found
+  //       }
+  //     } catch (e) {
+  //       console.error("Error fetching balances:", e);
+  //     }
+  //   };
+
+  //   fetchBalances();
+  // }, [publicKey, connection, getNetwork]);
   useEffect(() => {
     if (!publicKey) return;
+
     const fetchBalances = async () => {
       try {
+        const endpoint = connection.rpcEndpoint;
+        const network = endpoint.includes("devnet")
+          ? "devnet"
+          : endpoint.includes("testnet")
+          ? "testnet"
+          : "mainnet";
+
         const sol = await connection.getBalance(publicKey);
-        //setSolBalance(sol / LAMPORTS_PER_SOL);
         setSolBalance(Number((sol / LAMPORTS_PER_SOL).toFixed(3)));
 
-        const network = getNetwork();
         const usdcMint = new PublicKey(USDC_MINTS[network]);
-
         const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
           publicKey,
-          {
-            mint: usdcMint,
-          }
+          { mint: usdcMint }
         );
 
         if (tokenAccounts.value.length > 0) {
@@ -76,7 +112,7 @@ export const useWalletBalance = () => {
               .uiAmount || 0;
           setUsdcBalance(Number(amount.toFixed(2)));
         } else {
-          setUsdcBalance(0); // No USDC token account found
+          setUsdcBalance(0);
         }
       } catch (e) {
         console.error("Error fetching balances:", e);
@@ -85,7 +121,7 @@ export const useWalletBalance = () => {
 
     fetchBalances();
   }, [publicKey, connection]);
-
+  
   useEffect(() => {
     setTotalUsd(solBalance * prices.sol + usdcBalance * prices.usdc);
   }, [solBalance, usdcBalance, prices]);

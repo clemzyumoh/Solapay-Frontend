@@ -3,7 +3,7 @@
 
 import { X, Search } from "lucide-react";
 import { useState } from "react";
-import Image from "next/image";
+//import Image from "next/image";
 import { FcBusinessman } from "react-icons/fc";
 import { useRouter } from "next/navigation";
 import { useNotifications } from "@/hooks/useNotifications";
@@ -107,7 +107,7 @@ export default function NotificationSidebar({ isOpen, onClose }: Props) {
                           );
 
                           // Remove from notifications list
-                          setNotifications((prev: any[]) =>
+                          setNotifications((prev: Notifications[]) =>
                             prev.filter((n) => n._id !== notif._id)
                           );
                         }}

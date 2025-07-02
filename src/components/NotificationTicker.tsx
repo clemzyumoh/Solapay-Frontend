@@ -1,4 +1,4 @@
-import Image from "next/image";
+//import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import { FcBusinessman } from "react-icons/fc";
 import { useRouter } from "next/navigation";
@@ -104,7 +104,7 @@ export default function NotificationTicker() {
                           );
 
                           // Remove from notifications list
-                          setNotifications((prev: any[]) =>
+                          setNotifications((prev: Notifications[]) =>
                             prev.filter((n) => n._id !== notif._id)
                           );
                         }}

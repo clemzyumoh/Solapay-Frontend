@@ -5,9 +5,9 @@ import toast from "react-hot-toast";
 
 import TokenSelect from "@/components/TokenSelect";
 
-import { PublicKey } from "@solana/web3.js";
+//import { PublicKey } from "@solana/web3.js";
 
-import { Invoice } from "@/types/invoice";
+//import { Invoice } from "@/types/invoice";
 
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useUser } from "@/context/UserContext";
@@ -15,20 +15,20 @@ import axios from "axios";
 import { useInvoiceContext } from "@/context/InvoiceContext";
 
 export default function CreateInvoicePage() {
-  const [createdInvoice, setCreatedInvoice] = useState<Invoice | null>(null);
-  const [showModal, setShowModal] = useState(false);
-  //const {publicKey,} = useWallet();
+  //const [createdInvoice, setCreatedInvoice] = useState<Invoice | null>(null);
+ // const [showModal, setShowModal] = useState(false);
+  
   const { publicKey } = useWallet();
   const { setAllInvoices, setUnpaidInvoices } = useInvoiceContext();
   const { user } = useUser(); // user.name, user.email, etc.
-  const isValidPublicKey = (key: string) => {
-    try {
-      new PublicKey(key);
-      return true;
-    } catch {
-      return false;
-    }
-  };
+  // const isValidPublicKey = (key: string) => {
+  //   try {
+  //     new PublicKey(key);
+  //     return true;
+  //   } catch {
+  //     return false;
+  //   }
+  // };
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -113,8 +113,8 @@ export default function CreateInvoicePage() {
       );
 
       const createdInvoice = response.data.invoice;
-      setCreatedInvoice(createdInvoice);
-      setShowModal(true);
+     // setCreatedInvoice(createdInvoice);
+//setShowModal(true);
       toast.success("Invoice created successfully");
       setAllInvoices((prev) => [createdInvoice, ...prev]);
       setUnpaidInvoices((prev) => [createdInvoice, ...prev]);

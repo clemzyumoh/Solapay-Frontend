@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import InvoiceModal from "@/components/InvoiceModal";
-import InvoiceCard, { InvoiceData } from "@/components/InvoiceCard";
+import InvoiceCard from "@/components/InvoiceCard";
 
 import { useInvoiceContext } from "@/context/InvoiceContext";
 import { useSearchParams } from "next/navigation";
 
 export default function InvoiceDetailPage() {
-  const { allInvoices, selectedInvoice, setSelectedInvoice , setAllInvoices} =
+  const { allInvoices, selectedInvoice, setSelectedInvoice } =
     useInvoiceContext();
     const [mounted, setMounted] = useState(false); // flag to delay modal rendering
     const searchParams = useSearchParams();
@@ -25,7 +25,7 @@ export default function InvoiceDetailPage() {
     useEffect(() => {
       setSelectedInvoice(null); // clear any invoice
       setMounted(true); // now it's safe to render
-    }, []);
+    }, [setSelectedInvoice]);
 
   return (
     <main className=" max-w-3xl mx-auto pb-10 p-6 mt-20">

@@ -3,18 +3,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import QRCode from "react-qr-code";
+
 import Image from "next/image";
-import TokenSelect from "@/components/TokenSelect";
+
 
 import { SolanaPayQRCode } from "@/components/SolanaPayQRCode";
 import toast from "react-hot-toast";
 import { BigNumber } from "bignumber.js";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletContextState } from "@solana/wallet-adapter-react";
-import { useInvoiceContext } from "@/context/InvoiceContext";
-import { useUser } from "@/context/UserContext";
+
 import { useSearchParams } from "next/navigation";
 
 
@@ -24,7 +23,7 @@ import { useSearchParams } from "next/navigation";
 
 import { TransactionInstruction } from "@solana/web3.js";
 
-import BN from "bn.js";
+
 
 
 
@@ -35,7 +34,7 @@ import {
   SystemProgram,
   Transaction,
   ComputeBudgetProgram,
-  sendAndConfirmTransaction,
+  //sendAndConfirmTransaction,
   
 } from "@solana/web3.js";
 import { useConnection } from "@solana/wallet-adapter-react";
@@ -44,7 +43,7 @@ import {
   getAssociatedTokenAddress,
   createAssociatedTokenAccountInstruction,
   createTransferInstruction,
-  TOKEN_PROGRAM_ID,
+ // TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
 
 
@@ -59,13 +58,13 @@ export default function PaymentPage() {
       const [load, setLoad] = useState(false);
     
         const [loading, setLoading] = useState(true); // NEW
-  const [activeTab, setActiveTab] = useState<"invoice" | "direct">("invoice");
-  const [formData, setFormData] = useState({
-    recipient: "",
-    amount: "",
-    token: "Sol",
-    note: "",
-  });
+  //const [activeTab, setActiveTab] = useState<"invoice" | "direct">("invoice");
+  // const [formData, setFormData] = useState({
+  //   recipient: "",
+  //   amount: "",
+  //   token: "Sol",
+  //   note: "",
+  // });
   const { connection } = useConnection();
   // DEVNET USDC (fake for devnet testing)
   const USDC_MINT = new PublicKey(
@@ -79,7 +78,7 @@ export default function PaymentPage() {
     wallets,
 
     publicKey,
-    sendTransaction
+    //sendTransaction
   } = useWallet();
 
 
@@ -116,7 +115,7 @@ export default function PaymentPage() {
         };
       
         doConnect();
-      }, [wallet.wallet, triggerConnect]);
+      }, [wallet.wallet, triggerConnect, connect, connected]);
       
     const handelDisconnect = () => {
         disconnect()
@@ -402,10 +401,10 @@ export default function PaymentPage() {
                 // blurDataURL="data:..." automatically provided
                 // placeholder="blur" // Optional blur-up while loading
               /> */}
-              <img
+              <Image
                 src="/logo4.svg"
                 alt="picture of logo"
-                className="w-12 h-12"
+                className="w-12 mb-2 h-12"
               />
 
               <h1 className="font-bold text-2xl bg-gradient-to-br from-[#9945ff] via-[#14f195] to-[#14f195] text-transparent bg-clip-text ">
@@ -429,7 +428,7 @@ export default function PaymentPage() {
 
           <div className="flex flex-col items-center space-y-2">
             {/* <QRCode value={invoice.solanaPayLink} size={160} /> */}
-            {activeTab === "invoice" &&
+            {
               invoice?.toName &&
               invoice?.reference &&
               invoice?.fromAddress && (

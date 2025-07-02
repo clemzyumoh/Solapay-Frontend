@@ -60,17 +60,27 @@ export default function InvoiceModal({ invoice, onClose }: Props) {
     `${address.slice(0, 8)}......${address.slice(-8)}`;
 
 
+  interface AxiosErrorResponse {
+    response?: {
+      data?: {
+        error?: string;
+      };
+    };
+  }
+
  // const InvoiceModal = ({ invoice, onClose, onDeleted }: any) => {
     const handleDelete = async () => {
       try {
         await deleteInvoiceById(invoice.invoiceId);
         toast.success("Invoice deleted successfully");
-       // onDeleted?.(); // optional callback to refresh list or close modal
+        // onDeleted?.(); // optional callback to refresh list or close modal
         onClose();
-      } catch (err: any) {
-        const msg = err?.response?.data?.error || "Error deleting invoice";
+      } catch (err: unknown) {
+        const error = err as AxiosErrorResponse;
+        const msg = error.response?.data?.error || "Error deleting invoice";
         toast.error(msg);
       }
+      
     };
   
   

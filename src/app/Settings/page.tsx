@@ -10,11 +10,11 @@ import { TbBrandLinkedinFilled } from "react-icons/tb";
 
 import { FaUserEdit } from "react-icons/fa";
 import { toast } from "react-hot-toast";
-import { MdCancel } from "react-icons/md";
+
 import { Sun, Moon } from "lucide-react";
 import NotificationBell from "../../components/NotificationBell";
 import { motion } from "framer-motion";
-import { useContext } from "react";
+
 //import { ThemeContext } from "../../components/ThemeProvider";
 import { useTheme } from "../../components/ThemeProvider";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -22,18 +22,18 @@ import { useUser } from "@/context/UserContext";
 import { uploadToCloudinary } from "@/services/cloudinary";
 import axios from "axios";
 import { RxAvatar } from "react-icons/rx";
-import Cookies from "js-cookie";
+
 import { logOut } from "@/services/api";
 import { useRouter } from "next/navigation";
 import { FundWalletButton } from "@/components/FundWalletButton";
 export default function SettingsPage() {
-  const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [primaryWallet, setPrimaryWallet] = useState("8Ka...def");
-  const [secondaryWallets, setSecondaryWallets] = useState<string[]>([
-    "6Ut...mno",
-  ]);
+  // const [profileImage, setProfileImage] = useState<string | null>(null);
+  // const [username, setUsername] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [primaryWallet, setPrimaryWallet] = useState("8Ka...def");
+  // const [secondaryWallets, setSecondaryWallets] = useState<string[]>([
+  //   "6Ut...mno",
+  // ]);
   //const { darkMode, setDarkMode } = useContext(ThemeContext);
   const { darkMode, toggleTheme} = useTheme();
   const { connect, disconnect, connected, select, wallets, wallet, publicKey } =
@@ -54,25 +54,25 @@ export default function SettingsPage() {
 };
 
   const router = useRouter();
-  const shortenAddress = (address: string) =>
-    `${address.slice(0, 6)}...${address.slice(-4)}`;
+  // const shortenAddress = (address: string) =>
+  //   `${address.slice(0, 6)}...${address.slice(-4)}`;
 
   const shortenAddressMob = (address: string) =>
     `${address.slice(0, 3)}...${address.slice(-3)}`;
 
-  const addSecondaryWallet = () => {
-    // For demo: add a dummy wallet, implement real input logic as needed
-    setSecondaryWallets((w) => [...w, "NewWalletAddress..."]);
-  };
+  // const addSecondaryWallet = () => {
+  //   // For demo: add a dummy wallet, implement real input logic as needed
+  //   setSecondaryWallets((w) => [...w, "NewWalletAddress..."]);
+  // };
 
-  const removeSecondaryWallet = (index: number) => {
-    setSecondaryWallets((w) => w.filter((_, i) => i !== index));
-  };
+  // const removeSecondaryWallet = (index: number) => {
+  //   setSecondaryWallets((w) => w.filter((_, i) => i !== index));
+  // };
 
-  const disconnectWallet = () => {
-    disconnect();
-    toast.success("Wallet disconnected!");
-  };
+  // const disconnectWallet = () => {
+  //   disconnect();
+  //   toast.success("Wallet disconnected!");
+  // };
   const handleLogout = async () => {
     try {
       await logOut(); // wait for backend to clear the cookie
@@ -87,21 +87,21 @@ export default function SettingsPage() {
     }
   };
 
-  const handleSaveProfile = () => {
-    if (!username.trim()) {
-      toast.error("Username is required");
-      return;
-    }
+  // const handleSaveProfile = () => {
+  //   if (!username.trim()) {
+  //     toast.error("Username is required");
+  //     return;
+  //   }
 
-    if (email && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      toast.error("Enter a valid email");
-      return;
-    }
+  //   if (email && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+  //     toast.error("Enter a valid email");
+  //     return;
+  //   }
 
-    // Simulate save
-    console.log("Saving profile:", { username, email, profileImage });
-    toast.success("Profile saved successfully");
-  };
+  //   // Simulate save
+  //   console.log("Saving profile:", { username, email, profileImage });
+  //   toast.success("Profile saved successfully");
+  // };
 
  
 

@@ -70,16 +70,18 @@ const [cooldownSeconds, setCooldownSeconds] = useState(0);
 
     try {
       // 📡 Call your backend API to fund wallet
-      const res = await axios.post("http://localhost:5000/solapay/fund", {
+      await axios.post("http://localhost:5000/solapay/fund", {
         userId: user._id,
         walletAddress: publicKey.toBase58(),
       });
 
       toast.success("Wallet funded with SOL + USDC");
       setCooldownSeconds(0); // Set cooldown manually after success
-    } catch (err: any) {
+    } catch (err: unknown) {
       const msg =
-        err?.response?.data?.error || "Failed to fund wallet. Try again later.";
+        axios.isAxiosError(err) && err.response?.data?.error
+          ? err.response.data.error
+          : "Failed to fund wallet. Try again later.";
       toast.error(msg);
     } finally {
       setLoading(false); // 🔄 Reset loading state

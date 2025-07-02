@@ -1,22 +1,21 @@
 "use client";
 
-import { FaEye, FaCog } from "react-icons/fa";
-import { HiOutlineUpload } from "react-icons/hi";
+import {  FaCog } from "react-icons/fa";
+
 import { IoHomeOutline } from "react-icons/io5";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
-import { useContext } from "react";
+
 import { FaSignOutAlt } from "react-icons/fa";
 import { FaFileInvoiceDollar } from "react-icons/fa6";
 import { TbListDetails } from "react-icons/tb";
 import Image from "next/image";
-import { TfiHelpAlt } from "react-icons/tfi";
 import { ImCoinDollar } from "react-icons/im";
 import toast from "react-hot-toast";
-import Cookies from "js-cookie";
+
 import { logOut } from "@/services/api";
 
 
@@ -24,12 +23,12 @@ const Sidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { disconnect } = useWallet();
-  const handleDisconnect = () => {
-    disconnect();
-    router.push("/");
+  // const handleDisconnect = () => {
+  //   disconnect();
+  //   router.push("/");
   
-    toast.success("Wallet disconnected!");
-  };
+  //   toast.success("Wallet disconnected!");
+  // };
   const handleLogout = async () => {
     try {
       await logOut(); // wait for backend to clear the cookie

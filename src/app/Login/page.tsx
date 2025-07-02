@@ -26,9 +26,9 @@ export default function LoginPage() {
       {/* Right form container */}
       <div className="w-full md:w-full flex items-center h-screen flex-col gap-10 justify-center z-10 p-8 lg:bg-transparent  backdrop-blur-[1px]  border-white/10 rounded-xl  ">
         <div className="flex items-end-safe justify-items-end-safe">
-          <img src="/logo4.svg" alt="ppicture of logo" className="  w-16 h-16" />
+          {/* <img src="/logo4.svg" alt="ppicture of logo" className="  w-16 h-16" /> */}
 
-          {/* <Image
+          <Image
             src="/logo4.svg"
             alt="Picture of the logo"
             className="mb-2"
@@ -36,7 +36,7 @@ export default function LoginPage() {
             height={60} //automatically provided
             // blurDataURL="data:..." automatically provided
             // placeholder="blur" // Optional blur-up while loading
-          /> */}
+          />
           <h1 className="font-bold text-2xl dark:bg-gradient-to-tl from-[#9945ff]  via-[#14f195] to-[#14f195] dark:text-transparent bg-clip-text ">
             OLAPAY
           </h1>

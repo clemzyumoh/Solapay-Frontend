@@ -2,7 +2,7 @@
 import React from "react";
 
 import Image from "next/image";
-import { useState } from "react";
+
 import RadialChart from "@/components/RadialChart";
 
 
@@ -11,11 +11,7 @@ import WormChart from "@/components/WormChartCard";
 import { useTheme } from "../components/ThemeProvider";
 import { SiSolana } from "react-icons/si";
 export const dynamic = "force-static";
-import {
-  FaEye,
-  FaEyeSlash,
-  
-} from "react-icons/fa";
+
 import { BsCoin } from "react-icons/bs";
 import SplineAreaChart from "@/components/SplineAreaChart";
 import NotificationTicker from "@/components/NotificationTicker";
@@ -31,10 +27,10 @@ export default function Home() {
  // const solanaTps = useSolanaTPS();
  
   const {darkMode} = useTheme()
-  const maxTps = 60000; // Theoretical or peak TPS
+ // const maxTps = 60000; // Theoretical or peak TPS
  // const solanaPercent = (solanaTps / maxTps) * 100;
   const usdcPercent = 80; // fixed 100% for USDC price
-  const [showBalance, setShowBalance] = useState(true);
+ // const [showBalance, setShowBalance] = useState(true);
   
 
   const { unpaidInvoices, allInvoices } = useInvoiceContext();
@@ -109,16 +105,16 @@ const { solBalance, usdcBalance, totalUsd, prices } = useWalletBalance();
                   <div className="flex justify-between w-full items-center">
                     <h1 className="font-bold text-2xl my-3 lg:my-5">Assets</h1>
                     <div className="flex items-end-safe justify-items-end-safe">
-                      <img
+                      <Image
                         src="/logo4.svg"
                         alt="picture of logo"
-                        className="w-12 h-12 lg:hidden"
+                        className="w-12 h-12 mb-2 lg:hidden"
                       />
 
-                      <img
+                      <Image
                         src="/logo4.svg"
                         alt="picture of logo"
-                        className="w-16 h-16 lg:block hidden"
+                        className="w-16 h-16 lg:block mb-2 hidden"
                       />
 
                       <h1 className="font-bold lg:text-2xl text-xl dark:bg-gradient-to-tl from-[#9945ff]  via-[#14f195] to-[#14f195] dark:text-transparent bg-clip-text ">

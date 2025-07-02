@@ -3,7 +3,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
-import { useContext } from "react";
+
 
 //import { ThemeContext } from "./ThemeProvider";
 import { useTheme } from "./ThemeProvider";
@@ -20,7 +20,7 @@ interface RadialChartProps {
 
 const RadialChart: React.FC<RadialChartProps> = ({ series, labels }) => {
   //const { darkMode, setDarkMode } = useContext(ThemeContext);
-  const {darkMode, toggleTheme} = useTheme()
+  const {darkMode} = useTheme()
 
     const textColor = darkMode ? "white" : "#000000";
 

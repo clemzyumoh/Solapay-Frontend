@@ -2,7 +2,7 @@
 
 // context/InvoiceContext.tsx
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { useUser } from "./UserContext";
 export type Invoice = {
@@ -51,23 +51,37 @@ export const InvoiceProvider = ({ children }: { children: React.ReactNode }) => 
   const [allInvoices, setAllInvoices] = useState<Invoice[]>([]);
   const [unpaidInvoices, setUnpaidInvoices] = useState<Invoice[]>([]);
   const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null);
-  const { user, setUser } = useUser();
+  const { user } = useUser();
 
-  const fetchInvoices = async () => {
+  // const fetchInvoices = async () => {
+  //   try {
+  //     const res = await axios.get(
+  //       `http://localhost:5000/invoice/getall?email=${user?.email}`
+  //     );
+
+  //     const invoices: Invoice[] = res.data;
+  //     setAllInvoices(invoices);
+  //     setUnpaidInvoices(invoices.filter((inv) => inv.status === "pending"));
+  //   } catch (err) {
+  //     console.error("Error fetching invoices:", err);
+  //   }
+  // };
+
+
+
+
+  const fetchInvoices = useCallback(async () => {
     try {
       const res = await axios.get(
         `http://localhost:5000/invoice/getall?email=${user?.email}`
       );
-
       const invoices: Invoice[] = res.data;
       setAllInvoices(invoices);
       setUnpaidInvoices(invoices.filter((inv) => inv.status === "pending"));
-   
     } catch (err) {
       console.error("Error fetching invoices:", err);
     }
-  };
-
+  }, [user?.email]); // dependencies used inside the function
 
   useEffect(() => {
     if (user?.email) {
@@ -79,8 +93,7 @@ export const InvoiceProvider = ({ children }: { children: React.ReactNode }) => 
 
       return () => clearInterval(interval); // cleanup
     }
-  }, [user?.email]);
-  
+  }, [user?.email, fetchInvoices]);
 
   const value: InvoiceContextProps = {
     allInvoices,
@@ -92,5 +105,7 @@ export const InvoiceProvider = ({ children }: { children: React.ReactNode }) => 
     setAllInvoices, //
   };
 
-  return <InvoiceContext.Provider value={value}>{children}</InvoiceContext.Provider>;
+  return (
+    <InvoiceContext.Provider value={value}>{children}</InvoiceContext.Provider>
+  );
 };

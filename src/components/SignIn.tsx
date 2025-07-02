@@ -56,17 +56,17 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
       // If login is successful, set token in cookies
       Cookies.set("token", response.token);
 
-
       // Redirect to dashboard or home
       router.push("/");
 
       // 👇 Fetch user details and set in context
       await getMe();
       toast.success("Login Successful.");
-    } catch (err: any) {
-      // If there's an error, show the message
-      setError(err.message || "Login failed. Please try again.");
-      toast.error("Login failed. Please try again.");
+    } catch (err: unknown) {
+      const errorMsg =
+        err instanceof Error ? err.message : "Login failed. Please try again.";
+      setError(errorMsg);
+      toast.error(errorMsg);
     }
   };
   return (
@@ -107,7 +107,7 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
       {/* Link to toggle to Sign Up */}
       <div className="flex justify-center items-center my-6 gap-4">
         <p className="">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <button className="ml-3 cursor-pointer" onClick={onSwitchToSignUp}>
             Sign Up
           </button>

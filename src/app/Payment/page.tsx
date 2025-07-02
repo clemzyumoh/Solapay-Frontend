@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import QRCode from "react-qr-code";
+
 import Image from "next/image";
 import TokenSelect from "@/components/TokenSelect";
 
 import { SolanaPayQRCode } from "@/components/SolanaPayQRCode";
 import toast from "react-hot-toast";
 import { BigNumber } from "bignumber.js";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletContextState } from "@solana/wallet-adapter-react";
 import { useInvoiceContext } from "@/context/InvoiceContext";
@@ -21,8 +21,6 @@ import { useUser } from "@/context/UserContext";
 
 import { TransactionInstruction } from "@solana/web3.js";
 
-import BN from "bn.js";
-
 
 
 import {
@@ -32,7 +30,7 @@ import {
   SystemProgram,
   Transaction,
   ComputeBudgetProgram,
-  sendAndConfirmTransaction,
+  //sendAndConfirmTransaction,
   
 } from "@solana/web3.js";
 import { useConnection } from "@solana/wallet-adapter-react";
@@ -42,7 +40,7 @@ import {
   getAssociatedTokenAddress,
   createAssociatedTokenAccountInstruction,
   createTransferInstruction,
-  TOKEN_PROGRAM_ID,
+  
 } from "@solana/spl-token";
 
 
@@ -74,7 +72,7 @@ export default function PaymentPage() {
     wallets,
 
     publicKey,
-    sendTransaction
+   // sendTransaction
   } = useWallet();
 
   const [triggerConnect, setTriggerConnect] = useState(false);
@@ -109,7 +107,7 @@ export default function PaymentPage() {
     };
 
     doConnect();
-  }, [wallet.wallet, triggerConnect]);
+  }, [wallet.wallet, triggerConnect, connect, connected]);
     
  
   const shortenAddress = (address: string) =>
@@ -340,10 +338,10 @@ export default function PaymentPage() {
             <div className="flex items-center justify-between w-full flex-col md:flex-row gap-4">
               <div className="flex items-center justify-center w-full">
               
-                <img
+                <Image
                   src="/logo4.svg"
                   alt="picture of logo"
-                  className="w-12 h-12"
+                  className="w-12 mb-2 h-12"
                 />
 
                 <h1 className="font-bold text-2xl dark:bg-gradient-to-br from-[#9945ff] via-[#14f195] to-[#14f195] dark:text-transparent bg-clip-text ">

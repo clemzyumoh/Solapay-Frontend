@@ -2,7 +2,6 @@
 
 // components/NotificationBell.tsx
 import { IoIosNotifications } from "react-icons/io";
-import { useEffect, useState } from "react";
 //import { useRouter } from "next/router";
 import Link from "next/link";
 

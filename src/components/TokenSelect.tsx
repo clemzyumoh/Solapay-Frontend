@@ -1,11 +1,16 @@
 
 
-import React from "react";
-import ReactSelect, { components } from "react-select";
+import React, { JSX } from "react";
+import ReactSelect, { components, OptionProps } from "react-select";
 import { BsCoin } from "react-icons/bs";
 import { SiSolana } from "react-icons/si";
 
-const options = [
+
+type OptionType = {
+  value: string;
+  label: JSX.Element;
+};
+const options: OptionType[] = [
   {
     value: "SOL",
     label: (
@@ -29,7 +34,10 @@ type TokenSelectProps = {
   onChange: (value: string) => void;
 };
 
-const Option = (props: any) => (
+// const Option = (props: any) => (
+//   <components.Option {...props}>{props.data.label}</components.Option>
+// );
+const Option = (props: OptionProps<OptionType, false>) => (
   <components.Option {...props}>{props.data.label}</components.Option>
 );
 

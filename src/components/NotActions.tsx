@@ -25,13 +25,23 @@ export default function NotificationActions({
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !(menuRef.current as any).contains(e.target)) {
+      // if (menuRef.current && !(menuRef.current as any).contains(e.target)) {
+      //   setOpen(false);
+      // }
+      if (
+        menuRef.current &&
+        !(menuRef.current as HTMLDivElement).contains(e.target as Node)
+      ) {
         setOpen(false);
       }
+      
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+
+  
   const handleDelete = async () => {
     try {
       await axios.delete(
@@ -39,7 +49,7 @@ export default function NotificationActions({
       );
       toast.success("Notification deleted");
       onDeleted?.();
-    } catch (err) {
+    } catch {
       toast.error("Failed to delete notification");
     }
   };
@@ -51,7 +61,7 @@ export default function NotificationActions({
       });
       toast.success("Marked as read");
       onMarkedRead?.();
-    } catch (err) {
+    } catch{
       toast.error("Failed to mark as read");
     }
   };

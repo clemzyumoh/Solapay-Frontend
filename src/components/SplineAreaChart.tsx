@@ -71,13 +71,23 @@ const SplineAreaChart = ({ data, categories }: ChartProps) => {
     <div className=" w-full p-0">
       <Chart options={options} series={series} type="area" height={350} />
       <div className="flex gap-2 mb-2 text-center">
-        {["30m", "1h", "4h", "7d"].map((r) => (
+        {/* {["30m", "1h", "4h", "7d"].map((r) => (
           <button
             key={r}
             className={`px-3 py-1 cursor-pointer text-sm rounded ${
               range === r ? " text-2xl font-bold  " : "text-gray-500"
             }`}
             onClick={() => setRange(r as any)}>
+            {r}
+          </button>
+        ))} */}
+        {(["30m", "1h", "4h", "7d"] as const).map((r) => (
+          <button
+            key={r}
+            className={`px-3 py-1 cursor-pointer text-sm rounded ${
+              range === r ? " text-2xl font-bold  " : "text-gray-500"
+            }`}
+            onClick={() => setRange(r)}>
             {r}
           </button>
         ))}

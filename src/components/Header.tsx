@@ -1,20 +1,17 @@
 "use client";
 import { useState,useEffect } from "react";
 
-import Link from "next/link";
+
 import { motion } from "framer-motion";
-import { FaSearch, FaUser, FaBell, FaCog, FaSignOutAlt } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { Sun, Moon } from "lucide-react";
 
 import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { useContext } from "react";
-import Image from "next/image";
+//import Image from "next/image";
 //import { ThemeContext } from "./ThemeProvider";
 import { useTheme } from "./ThemeProvider";
 import { usePathname } from "next/navigation";
 import { IoIosNotifications } from "react-icons/io";
-import NotificationBell from "./NotificationBell";
 import NotificationSidebar from "./NotificationSidebar";
 import toast from "react-hot-toast";
 import { RxAvatar } from "react-icons/rx";
@@ -36,7 +33,7 @@ const Header = () => {
   const { user } = useUser();
 
   const currentLabel: string = routeLabels[pathname] || "SolaPay";
-  const { connect, disconnect, connected, select, wallets, wallet, publicKey } =
+  const { connect,  connected, select, wallets, wallet, publicKey } =
     useWallet();
   
     // const handleConnect = async () => {
@@ -84,7 +81,7 @@ const Header = () => {
       };
 
       doConnect();
-    }, [wallet, triggerConnect]);
+    }, [wallet, triggerConnect, connect, connected]);
   
 
   const shortenAddress = (address: string) =>
@@ -182,7 +179,7 @@ const Header = () => {
 
         <div className="flex  justify-center items-center">
           <div className="flex items-end-safe justify-items-end-safe">
-            <img src="/logo4.svg" alt="picture of logo" className="w-12 h-12" />
+            <img src="/logo4.svg" alt="picture of logo" className="w-12 mb-2 h-12" />
             {/* <Image
               src="/logo4.svg"
               alt="Picture of the logo"

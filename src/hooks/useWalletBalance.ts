@@ -25,12 +25,7 @@ export const useWalletBalance = () => {
   const [totalUsd, setTotalUsd] = useState(0);
   const [prices, setPrices] = useState({ sol: 0, usdc: 1 });
 
-  // const getNetwork = () => {
-  //   const endpoint = connection.rpcEndpoint;
-  //   if (endpoint.includes("devnet")) return "devnet";
-  //   if (endpoint.includes("testnet")) return "testnet";
-  //   return "mainnet";
-  // };
+  
 
   useEffect(() => {
     const fetchPrices = async () => {

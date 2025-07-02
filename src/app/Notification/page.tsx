@@ -117,6 +117,8 @@ export default function NotificationsPage() {
                           <Image
                             src={avatarUrl}
                             alt="avatar"
+                            width={40}
+                            height={40}
                             className="w-full h-full rounded-full object-cover"
                           />
                         </div>
@@ -134,7 +136,8 @@ export default function NotificationsPage() {
                       </p>
 
                       <span className="text-xs text-gray-400">
-                        {notif.createdAt}|| {notif.isRead ? "Read" : "Unread"}
+                        {new Date(notif.createdAt).toLocaleString()} {"  "}
+                        {notif.isRead ? "Read" : "Unread"}
                       </span>
                     </div>
                   </div>

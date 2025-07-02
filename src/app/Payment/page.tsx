@@ -341,7 +341,9 @@ export default function PaymentPage() {
                 <Image
                   src="/logo4.svg"
                   alt="picture of logo"
-                  className="w-12 mb-2 h-12"
+                      className="w-12 mb-2 h-12"
+                      width={40}
+                      height={40}
                 />
 
                 <h1 className="font-bold text-2xl dark:bg-gradient-to-br from-[#9945ff] via-[#14f195] to-[#14f195] dark:text-transparent bg-clip-text ">

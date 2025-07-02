@@ -1,10 +1,9 @@
-"use client"
+"use client";
 import React from "react";
 
 import Image from "next/image";
 
 import RadialChart from "@/components/RadialChart";
-
 
 import WormChart from "@/components/WormChartCard";
 
@@ -24,17 +23,16 @@ import { useUser } from "@/context/UserContext";
 import BalanceButton from "@/components/BalanceButton";
 
 export default function Home() {
- // const solanaTps = useSolanaTPS();
- 
-  const {darkMode} = useTheme()
- // const maxTps = 60000; // Theoretical or peak TPS
- // const solanaPercent = (solanaTps / maxTps) * 100;
+  // const solanaTps = useSolanaTPS();
+
+  const { darkMode } = useTheme();
+  // const maxTps = 60000; // Theoretical or peak TPS
+  // const solanaPercent = (solanaTps / maxTps) * 100;
   const usdcPercent = 80; // fixed 100% for USDC price
- // const [showBalance, setShowBalance] = useState(true);
-  
+  // const [showBalance, setShowBalance] = useState(true);
 
   const { unpaidInvoices, allInvoices } = useInvoiceContext();
-  const {user} = useUser()
+  const { user } = useUser();
 
   // Get the most recent unpaid invoices (e.g., top 4)
   const recentInvoices = unpaidInvoices
@@ -44,56 +42,54 @@ export default function Home() {
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     )
     .slice(0, 6);
-    const [selectedInvoice, setSelectedInvoice] =
-      React.useState<InvoiceData | null>(null);
-  
-      const sentCount = allInvoices.filter(
-        (inv) => inv.fromEmail === user?.email
-      ).length;
-      const receivedCount = allInvoices.filter(
-        (inv) => inv.toemail === user?.email
-      ).length;
-      
+  const [selectedInvoice, setSelectedInvoice] =
+    React.useState<InvoiceData | null>(null);
 
-  
-const mockData = {
-  "30m": [
-    [31, 40, 28, 51, 42, 109, 100],
-    [11, 32, 45, 32, 34, 52, 41],
-  ],
-  "1h": [
-    [22, 56, 43, 29, 60, 80, 75],
-    [17, 21, 44, 38, 56, 45, 62],
-  ],
-  "4h": [
-    [40, 80, 60, 90, 120, 110, 100],
-    [20, 35, 55, 50, 70, 65, 60],
-  ],
-  "7d": [
-    [100, 150, 130, 170, 160, 180, 200],
-    [80, 90, 95, 100, 110, 105, 115],
-  ],
-};
+  const sentCount = allInvoices.filter(
+    (inv) => inv.fromEmail === user?.email
+  ).length;
+  const receivedCount = allInvoices.filter(
+    (inv) => inv.toemail === user?.email
+  ).length;
 
-const mockCategories = {
-  "30m": [...Array(7)]
-    .map((_, i) => new Date(Date.now() - i * 5 * 60000).toISOString())
-    .reverse(),
-  "1h": [...Array(7)]
-    .map((_, i) => new Date(Date.now() - i * 10 * 60000).toISOString())
-    .reverse(),
-  "4h": [...Array(7)]
-    .map((_, i) => new Date(Date.now() - i * 40 * 60000).toISOString())
-    .reverse(),
-  "7d": [...Array(7)]
-    .map((_, i) => new Date(Date.now() - i * 24 * 60 * 60000).toISOString())
-    .reverse(),
-};
-  
-const { solBalance, usdcBalance, totalUsd, prices } = useWalletBalance();
+  const mockData = {
+    "30m": [
+      [31, 40, 28, 51, 42, 109, 100],
+      [11, 32, 45, 32, 34, 52, 41],
+    ],
+    "1h": [
+      [22, 56, 43, 29, 60, 80, 75],
+      [17, 21, 44, 38, 56, 45, 62],
+    ],
+    "4h": [
+      [40, 80, 60, 90, 120, 110, 100],
+      [20, 35, 55, 50, 70, 65, 60],
+    ],
+    "7d": [
+      [100, 150, 130, 170, 160, 180, 200],
+      [80, 90, 95, 100, 110, 105, 115],
+    ],
+  };
+
+  const mockCategories = {
+    "30m": [...Array(7)]
+      .map((_, i) => new Date(Date.now() - i * 5 * 60000).toISOString())
+      .reverse(),
+    "1h": [...Array(7)]
+      .map((_, i) => new Date(Date.now() - i * 10 * 60000).toISOString())
+      .reverse(),
+    "4h": [...Array(7)]
+      .map((_, i) => new Date(Date.now() - i * 40 * 60000).toISOString())
+      .reverse(),
+    "7d": [...Array(7)]
+      .map((_, i) => new Date(Date.now() - i * 24 * 60 * 60000).toISOString())
+      .reverse(),
+  };
+
+  const { solBalance, usdcBalance, totalUsd, prices } = useWalletBalance();
 
   if (!prices) return <p>Loading balances...</p>;
-  
+
   return (
     <main className="lg:mt-24 mt-20 mb-32 flex lg:w-[80vw] w-full overflow-x-hidden justify-center items-center p-6 md:p-6 h-full">
       <div className="flex flex-col justify-center items-center w-full h-full">
@@ -107,14 +103,19 @@ const { solBalance, usdcBalance, totalUsd, prices } = useWalletBalance();
                     <div className="flex items-end-safe justify-items-end-safe">
                       <Image
                         src="/logo4.svg"
-                        alt="picture of logo"
-                        className="w-12 h-12 mb-2 lg:hidden"
+                        alt="Picture of the logo"
+                        width={40}
+                        height={40}
+                        className="w-12 h-12  lg:hidden"
                       />
 
+                     
                       <Image
                         src="/logo4.svg"
-                        alt="picture of logo"
-                        className="w-16 h-16 lg:block mb-2 hidden"
+                        alt="Picture of the logo"
+                        width={60}
+                        height={60}
+                        className=" w-16 h-16 lg:block hidden"
                       />
 
                       <h1 className="font-bold lg:text-2xl text-xl dark:bg-gradient-to-tl from-[#9945ff]  via-[#14f195] to-[#14f195] dark:text-transparent bg-clip-text ">

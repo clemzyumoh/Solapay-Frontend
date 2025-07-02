@@ -3,7 +3,7 @@
 
 import { X, Search } from "lucide-react";
 import { useState } from "react";
-//import Image from "next/image";
+import Image from "next/image";
 import { FcBusinessman } from "react-icons/fc";
 import { useRouter } from "next/navigation";
 import { useNotifications } from "@/hooks/useNotifications";
@@ -122,9 +122,11 @@ export default function NotificationSidebar({ isOpen, onClose }: Props) {
                       <div className="flex justify-between items-center w-[40%]  md:w-1/3 md:mr-0 h-full overflow-hidden">
                         {avatarUrl ? (
                           <div className="rounded-full border-[#14f195] border-2 w-12 h-12 ">
-                            <img
+                            <Image
                               src={avatarUrl}
                               alt="avatar"
+                              width={40}
+                              height={40}
                               className="w-full h-full rounded-full object-cover"
                             />
                           </div>
@@ -142,7 +144,7 @@ export default function NotificationSidebar({ isOpen, onClose }: Props) {
                         </p>
 
                         <span className="text-xs text-gray-400">
-                          {notif.createdAt} ||{" "}
+                          {new Date(notif.createdAt).toLocaleString()} {"  "}
                           {notif.isRead ? "Read" : "Unread"}
                         </span>
                       </div>

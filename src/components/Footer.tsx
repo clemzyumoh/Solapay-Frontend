@@ -13,7 +13,7 @@ export default function Footer() {
         {/* Branding */}
         <div className="flex items-end-safe justify-items-end-safe">
          
-          <Image src="/logo4.svg" alt="picture of logo" className="w-12 mb-2 h-12" />
+          <Image src="/logo4.svg" alt="picture of logo" width={40} height={40} className="w-12  h-12" />
 
           <h1 className="font-bold text-2xl dark:bg-gradient-to-br from-[#9945ff] via-[#14f195] to-[#14f195] dark:text-transparent bg-clip-text ">
             OLAPAY

@@ -401,10 +401,14 @@ export default function PaymentPage() {
                 // blurDataURL="data:..." automatically provided
                 // placeholder="blur" // Optional blur-up while loading
               /> */}
+           
               <Image
                 src="/logo4.svg"
-                alt="picture of logo"
-                className="w-12 mb-2 h-12"
+                alt="Picture of the logo"
+                width={40}
+                height={40}
+                  className="w-12 h-12 mb-5"
+                  priority
               />
 
               <h1 className="font-bold text-2xl bg-gradient-to-br from-[#9945ff] via-[#14f195] to-[#14f195] text-transparent bg-clip-text ">
@@ -428,24 +432,21 @@ export default function PaymentPage() {
 
           <div className="flex flex-col items-center space-y-2">
             {/* <QRCode value={invoice.solanaPayLink} size={160} /> */}
-            {
-              invoice?.toName &&
-              invoice?.reference &&
-              invoice?.fromAddress && (
-                <SolanaPayQRCode
-                  reference={new PublicKey(invoice?.reference)}
-                  recipient={new PublicKey(invoice?.fromAddress)}
-                  amount={new BigNumber(invoice.amount).toNumber()} // ✅ FIXED
-                  label="Pay Invoice"
-                  message={`Invoice #${invoice?.invoiceId}`}
-                  memo={`solapay-${invoice?.invoiceId}`}
-                  //reference={new PublicKey(invoice?.reference)}
-                  trackPayment
-                  onConfirmed={() => {
-                    toast.success("Payment received!");
-                  }}
-                />
-              )}
+            {invoice?.toName && invoice?.reference && invoice?.fromAddress && (
+              <SolanaPayQRCode
+                reference={new PublicKey(invoice?.reference)}
+                recipient={new PublicKey(invoice?.fromAddress)}
+                amount={new BigNumber(invoice.amount).toNumber()} // ✅ FIXED
+                label="Pay Invoice"
+                message={`Invoice #${invoice?.invoiceId}`}
+                memo={`solapay-${invoice?.invoiceId}`}
+                //reference={new PublicKey(invoice?.reference)}
+                trackPayment
+                onConfirmed={() => {
+                  toast.success("Payment received!");
+                }}
+              />
+            )}
             <button
               className="bg-gray-950 rounded-xl mt-5 cursor-pointer text-white shadow-[2px_2px_5px_#040f4c,-2px_-2px_5px_#040f4c] px-4 py-3 text-sm "
               onClick={() => {

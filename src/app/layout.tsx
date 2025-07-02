@@ -14,6 +14,7 @@ import { Toaster } from "react-hot-toast";
 import AuthWrapper from "../components/AuthWrapper"
 import { UserProvider } from "@/context/UserContext";
 import { InvoiceProvider } from "@/context/InvoiceContext";
+import { Suspense } from "react";
 
 
 
@@ -66,8 +67,10 @@ export default function RootLayout({
         </head>
         <body>
           <Toaster position="top-right" />
-
-          <SolanaProvider>{children}</SolanaProvider>
+          <Suspense>
+            <SolanaProvider>{children}</SolanaProvider>
+          </Suspense>
+          
         </body>
       </html>
     );

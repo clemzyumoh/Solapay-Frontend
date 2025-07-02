@@ -7,7 +7,7 @@ import { FaSearch } from "react-icons/fa";
 import { Sun, Moon } from "lucide-react";
 
 import { useWallet } from "@solana/wallet-adapter-react";
-//import Image from "next/image";
+import Image from "next/image";
 //import { ThemeContext } from "./ThemeProvider";
 import { useTheme } from "./ThemeProvider";
 import { usePathname } from "next/navigation";
@@ -21,7 +21,9 @@ import { FundWalletButton } from "./FundWalletButton";
 const routeLabels: Record<string, string> = {
   "/": "Home",
   "/Create": "Create",
-  "/Details": "Details",
+  "/Transaction": "Transaction",
+  "/Payment": "Payment",
+  "/Notification": "Notification",
   "/Settings": "Settings",
 };
 const Header = () => {
@@ -179,8 +181,8 @@ const Header = () => {
 
         <div className="flex  justify-center items-center">
           <div className="flex items-end-safe justify-items-end-safe">
-            <img src="/logo4.svg" alt="picture of logo" className="w-12 mb-2 h-12" />
-            {/* <Image
+            {/* <img src="/logo4.svg" alt="picture of logo" className="w-12 mb-2 h-12" /> */}
+            <Image
               src="/logo4.svg"
               alt="Picture of the logo"
               className="mb-2"
@@ -188,7 +190,7 @@ const Header = () => {
               height={40} //automatically provided
               // blurDataURL="data:..." automatically provided
               // placeholder="blur" // Optional blur-up while loading
-            /> */}
+            />
             <h1 className="font-bold text-2xl dark:bg-gradient-to-br from-[#9945ff] via-[#14f195] to-[#14f195] dark:text-transparent bg-clip-text ">
               OLAPAY
             </h1>

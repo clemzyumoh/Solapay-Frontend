@@ -87,12 +87,12 @@ export default function InvoiceModal({ invoice, onClose }: Props) {
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center overflow-y-auto overscroll-contain">
       {/* <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">*/}
-      <div className="bg-white text-black md:py-10 py-16 rounded-lg shadow-lg w-full max-w-md p-4 m-4 relative max-h-[calc(100vh-4rem)] overflow-y-auto">
+      <div className="bg-white text-black pt-12 pb-20  rounded-lg shadow-lg w-full max-w-md p-4 m-4 relative max-h-[calc(100vh-4rem)] overflow-y-auto">
         <Toaster position="top-right" />
 
         {/* Close Modal Button */}
         <button
-          className="absolute md:top-10 top-16 right-3 text-gray-600 hover:text-gray-900"
+          className="absolute top-12 right-3 text-gray-600 hover:text-gray-900"
           onClick={onClose}
           aria-label="Close modal">
           <FaRegCircleXmark className="text-2xl" />

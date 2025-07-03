@@ -116,7 +116,7 @@ export const metadata = {
   title: "SolaPay",
   description: "Fast, secure invoice payments on Solana.",
   icons: {
-    icon: "/logo7.svg",
+    icon: "/favicon.ico",
   },
 };
 

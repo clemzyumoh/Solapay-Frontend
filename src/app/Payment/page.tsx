@@ -259,7 +259,7 @@ export default function PaymentPage() {
 
       // ✅ Call backend to update invoice
       await fetch(
-        `http://localhost:5000/invoice/updateinvoice?signature=${signature}&reference=${reference}`,
+        `https://solapay-backend.onrender.com/invoice/updateinvoice?signature=${signature}&reference=${reference}`,
         {
           method: "PATCH",
         }

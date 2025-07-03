@@ -45,7 +45,7 @@ export default function NotificationActions({
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:5000/notify/deletenot/${notificationId}`
+        `https://solapay-backend.onrender.com/notify/deletenot/${notificationId}`
       );
       toast.success("Notification deleted");
       onDeleted?.();
@@ -56,9 +56,12 @@ export default function NotificationActions({
 
   const handleMarkRead = async () => {
     try {
-      await axios.patch("http://localhost:5000/notify/markasRead", {
-        notificationIds: [notificationId],
-      });
+      await axios.patch(
+        "https://solapay-backend.onrender.com/notify/markasRead",
+        {
+          notificationIds: [notificationId],
+        }
+      );
       toast.success("Marked as read");
       onMarkedRead?.();
     } catch{

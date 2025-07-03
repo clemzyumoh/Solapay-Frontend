@@ -15,6 +15,7 @@ import AuthWrapper from "../components/AuthWrapper"
 import { UserProvider } from "@/context/UserContext";
 import { InvoiceProvider } from "@/context/InvoiceContext";
 import { Suspense } from "react";
+import Head from "next/head";
 
 
 
@@ -56,7 +57,7 @@ export default function RootLayout({
         lang="en"
         className={`bg-[#0B091A] text-white 
       `}>
-        <head>
+        <Head>
           <title>SolaPay</title>
           <link
             rel="icon"
@@ -64,7 +65,7 @@ export default function RootLayout({
             type="image/svg+xml"
             sizes="180x180"
           />
-        </head>
+        </Head>
         <body>
           <Toaster position="top-right" />
           <Suspense>
@@ -83,7 +84,7 @@ export default function RootLayout({
         isAuth ? "lg:ml-0  lg:mx-0" : "  "
       }
       text-black`}>
-      <head>
+      <Head>
         <title>SolaPay</title>
         <link
           rel="icon"
@@ -91,7 +92,7 @@ export default function RootLayout({
           type="image/svg+xml"
           sizes="180x180"
         />
-      </head>
+      </Head>
 
       <body
         className={`min-h-screen flex flex-col   ${spaceGrotesk.variable} ${sora.variable} antialiased`}>

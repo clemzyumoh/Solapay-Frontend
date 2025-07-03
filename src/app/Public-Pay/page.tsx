@@ -153,7 +153,7 @@ export default function PaymentPage() {
       const fetchInvoice = async () => {
         try {
           const res = await fetch(
-            `http://localhost:5000/invoice/getbyid?${
+            `https://solapay-backend.onrender.com/invoice/getbyid?${
               invoiceId ? `invoiceId=${invoiceId}` : `reference=${reference}`
             }`
           );
@@ -306,7 +306,7 @@ export default function PaymentPage() {
       await connection.confirmTransaction(signature, "confirmed");
       // ✅ Call backend to update invoice
       await fetch(
-        `http://localhost:5000/invoice/updateinvoice?signature=${signature}`,
+        `https://solapay-backend.onrender.com/invoice/updateinvoice?signature=${signature}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

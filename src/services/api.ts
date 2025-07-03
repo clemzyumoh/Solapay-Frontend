@@ -5,8 +5,8 @@
 import axios from "axios"; // Import Axios for making HTTP requests
 
 // ✅ Define your backend URL
-//const BASE_URL = "https://merklecert-backend.onrender.com/api"; // Use your production backend
-const BASE_URL = "http://localhost:5000/auth"; // Use this during local dev
+const BASE_URL = "https://solapay-backend.onrender.com/auth"; // Use your production backend
+//const BASE_URL = "http://localhost:5000/auth"; // Use this during local dev
 
 // ✅ Create an Axios instance with default headers
 const apiClient = axios.create({
@@ -102,7 +102,7 @@ export const logOut = async () => {
 
 export const deleteInvoiceById = async (invoiceId: string) => {
   const res = await axios.delete(
-    `http://localhost:5000/invoice/deleteinvoice`,
+    `https://solapay-backend.onrender.com/invoice/deleteinvoice`,
     {
       params: { invoiceId },
     }

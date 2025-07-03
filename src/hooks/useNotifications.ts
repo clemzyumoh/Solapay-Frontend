@@ -14,7 +14,7 @@ export const useNotifications = () => {
     const fetchNotifications = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/notify/getallnot/${user?.email}`
+          `https://solapay-backend.onrender.com/notify/getallnot/${user?.email}`
         );
         setNotifications(res.data.notifications || []);
       } catch (err) {

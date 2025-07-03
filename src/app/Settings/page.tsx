@@ -140,7 +140,7 @@ export default function SettingsPage() {
 
 
       const response = await axios.put(
-        "http://localhost:5000/auth/profile/image",
+        "https://solapay-backend.onrender.com/auth/profile/image",
         {
           userId: user._id,
           imageUrl,

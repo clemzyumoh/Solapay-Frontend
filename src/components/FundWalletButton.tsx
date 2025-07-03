@@ -70,7 +70,7 @@ const [cooldownSeconds, setCooldownSeconds] = useState(0);
 
     try {
       // 📡 Call your backend API to fund wallet
-      await axios.post("http://localhost:5000/solapay/fund", {
+      await axios.post("https://solapay-backend.onrender.com/solapay/fund", {
         userId: user._id,
         walletAddress: publicKey.toBase58(),
       });

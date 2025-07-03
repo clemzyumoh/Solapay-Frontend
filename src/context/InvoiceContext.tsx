@@ -73,7 +73,7 @@ export const InvoiceProvider = ({ children }: { children: React.ReactNode }) => 
   const fetchInvoices = useCallback(async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/invoice/getall?email=${user?.email}`
+        `https://solapay-backend.onrender.com/invoice/getall?email=${user?.email}`
       );
       const invoices: Invoice[] = res.data;
       setAllInvoices(invoices);

@@ -30,9 +30,12 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const getMe = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/auth/me", {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        "https://solapay-backend.onrender.com/auth/me",
+        {
+          withCredentials: true,
+        }
+      );
       setUser(response.data.user);
       console.log("Fetched user:", response.data.user);
     } catch {

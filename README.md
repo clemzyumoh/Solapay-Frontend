@@ -24,6 +24,4 @@ SolaPay is a modern peer-to-peer invoicing and payment application built on the 
 
 ## Getting Started
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/your-username/solapay-frontend.git
+1. GitHub Link:https://github.com/clemzyumoh/Solapay-Frontend

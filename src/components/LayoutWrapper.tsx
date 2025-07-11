@@ -22,7 +22,10 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   const isAuth = pathname === "/Login";
 
   // ✅ special layout for public payment pages
-  if (pathname.startsWith("/Public-Pay")) {
+  if (
+    pathname.startsWith("/Public-Pay") ||
+    pathname.startsWith("/public-pay")
+  ) {
     return (
       <body className="bg-[#0B091A] text-white">
         <Toaster position="top-right" />

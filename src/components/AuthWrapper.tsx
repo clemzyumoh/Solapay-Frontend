@@ -19,14 +19,21 @@ export default function AuthWrapper({
   const router = useRouter();
   const pathname = usePathname();
   const isAuth = pathname === "/Login";
+  const isPublic = pathname.startsWith("/Public-Pay");
 
+  // useEffect(() => {
+  //   if (!loading && !user) {
+  //     router.push("/Login");
+  //   }
+  // }, [loading, user, router]);
   useEffect(() => {
-    if (!loading && !user) {
-      router.push("/Login");
+    if (!loading && !user && !isAuth && !isPublic) {
+      router.replace("/Login"); // use replace to avoid extra history entry
     }
-  }, [loading, user, router]);
+  }, [loading, user, router, isAuth, isPublic]);
 
-  if (loading) {
+
+  if (loading || (!user && !isAuth && !isPublic)) {
     // Or a spinner
     return (
       <div className="flex items-center justify-center h-screen bg-[#0B091A] text-white">
@@ -43,7 +50,7 @@ export default function AuthWrapper({
                 alt="ppicture of logo"
                 className=" w-12 h-12"
               /> */}
-              
+
               <Image
                 src="/logo4.svg"
                 alt="logo"

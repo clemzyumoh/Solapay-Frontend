@@ -132,7 +132,7 @@ const Sidebar = () => {
       </nav>
 
       {/* Bottom Section */}
-      <div className="absolute bottom-20 left-6 font-bold space-y-4">
+      <div className="absolute bottom-12 left-6 font-bold space-y-4">
         <button
           onClick={handleLogout}
           className="flex items-center space-x-2 py-4 px-8 rounded shadow-[2px_2px_2px_#040f4c] text-[#9945ff] dark:text-gray-100 hover:border hover:border-[#040f4c] dark:hover:border-[#9945ff] cursor-pointer hover:scale-100 ">

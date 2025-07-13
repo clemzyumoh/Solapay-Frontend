@@ -33,14 +33,14 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
     loginWithGoogle();
     toast.success("Google Authetication.");
     await getMe(); // Fetch and set user first
-    router.push("/"); // Then redirect
+    router.push("/dashboard"); // Then redirect
    
   };
   const handleDiscord = async () => {
     loginWithDiscord();
     toast.success("Discord Authetication.");
     await getMe(); // Fetch and set user first
-    router.push("/"); // Then redirect
+    router.push("/dashboard"); // Then redirect
    
   };
  
@@ -56,11 +56,11 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
       // If login is successful, set token in cookies
       Cookies.set("token", response.token);
 
-      // Redirect to dashboard or home
-      router.push("/");
 
       // 👇 Fetch user details and set in context
       await getMe();
+      // Redirect to dashboard or home
+      router.push("/dashboard");
       toast.success("Login Successful.");
     } catch (err: unknown) {
       const errorMsg =

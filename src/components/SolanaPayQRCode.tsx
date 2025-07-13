@@ -35,10 +35,16 @@ export const SolanaPayQRCode: FC<SolanaPayQRCodeProps> = ({
   const [confirmed, setConfirmed] = useState(false);
 
   // Generate reference if not provided
-  const finalReference = useMemo(
-    () => reference || Keypair.generate().publicKey,
-    [reference]
-  );
+  // const finalReference = useMemo(
+  //   () => reference || Keypair.generate().publicKey,
+  //   [reference]
+  // );
+  const finalReference = useMemo(() => {
+    if (reference) return reference;
+    console.warn("Missing reference — this will break payment tracking.");
+    return Keypair.generate().publicKey; // fallback (not ideal)
+  }, [reference]);
+
 
   // Build Solana Pay URL
   const url = useMemo(() => {

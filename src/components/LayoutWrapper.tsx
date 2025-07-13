@@ -19,29 +19,52 @@ import PageTracker from "./PageTracker";
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isAuth = pathname === "/Login";
+  // // ✅ app/public-pay/layout.tsx
+  // "use client";
+
+  // import { Toaster } from "react-hot-toast";
+  // import { Suspense } from "react";
+  // import SolanaProvider from "@/components/SolanaProvider";
+
+  // export default function PublicPayLayout({
+  //   children,
+  // }: {
+  //   children: React.ReactNode;
+  // }) {
+  //   return (
+  //     <div className="  bg-[#0B091A] text-white min-h-screen h-full">
+  //       <Toaster position="top-right" />
+  //       <Suspense>
+  //         <SolanaProvider>{children}</SolanaProvider>
+  //       </Suspense>
+  //     </div>
+  //   );
+  // }
+
+  const isPublicPay =
+    pathname.startsWith("/Public-Pay") || pathname.startsWith("/public-pay");
 
   // ✅ special layout for public payment pages
-  if (
-    pathname.startsWith("/Public-Pay") ||
-    pathname.startsWith("/public-pay")
-  ) {
+  if (isPublicPay) {
+    //  console.log("PublicPay Layout detected");
     return (
-      <body className="bg-[#0B091A] text-white">
+      <div className="bg-[#0B091A] text-white min-h-screen h-full">
         <Toaster position="top-right" />
+
         <Suspense>
           <SolanaProvider>{children}</SolanaProvider>
         </Suspense>
-      </body>
+      </div>
     );
   }
+  const isAuth = pathname === "/Login";
+  //const isPublicPay = pathname === "/public-pay"; // ✅ Add this
 
   return (
-    <body
+    <div
       className={`min-h-screen flex flex-col text-black dark:text-white dark:bg-[#0B091A] bg-[#E3EEFF] ${
         isAuth ? "lg:ml-0  lg:mx-0" : ""
-      }`}
-    >
+      }`}>
       <UserProvider>
         <AuthWrapper>
           <SolanaProvider>
@@ -59,6 +82,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
           </SolanaProvider>
         </AuthWrapper>
       </UserProvider>
-    </body>
+    </div>
   );
 }
+

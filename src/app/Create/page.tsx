@@ -81,6 +81,8 @@ export default function CreateInvoicePage() {
     if (formData.dueDate && new Date(formData.dueDate) < new Date()) {
       newErrors.dueDate = "Due date must be in the future";
     }
+   
+
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -88,7 +90,11 @@ export default function CreateInvoicePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    // ✅ Prevent submission if wallet is not connected
+    if (!publicKey) {
+      toast.error("Please connect your wallet before creating an invoice.");
+      return;
+    }
     if (!validateForm()) {
       toast.error("Please fix form errors");
       return;
@@ -113,8 +119,8 @@ export default function CreateInvoicePage() {
       );
 
       const createdInvoice = response.data.invoice;
-     // setCreatedInvoice(createdInvoice);
-//setShowModal(true);
+      // setCreatedInvoice(createdInvoice);
+      //setShowModal(true);
       toast.success("Invoice created successfully");
       setAllInvoices((prev) => [createdInvoice, ...prev]);
       setUnpaidInvoices((prev) => [createdInvoice, ...prev]);
@@ -251,7 +257,7 @@ export default function CreateInvoicePage() {
 
         {/* Action Button */}
         <button
-          disabled={loading}
+          disabled={loading }
           type="submit"
           className="w-full dark:border-2 bg-[#14f195] dark:bg-transparent rounded-2xl dark:border-[#14f195] dark:text-[#14f195] cursor-pointer py-2 px-4 ">
           {loading ? "Generating..." : "Generate Invoice"}

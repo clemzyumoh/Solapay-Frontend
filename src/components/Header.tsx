@@ -19,7 +19,7 @@ import { useUser } from "@/context/UserContext";
 import { FundWalletButton } from "./FundWalletButton";
 
 const routeLabels: Record<string, string> = {
-  "/": "Home",
+  "/dashboard": "Home",
   "/Create": "Create",
   "/Transaction": "Transaction",
   "/Payment": "Payment",

@@ -143,41 +143,81 @@ export default function PaymentPage() {
     dueDate?: string;
     solanaUrl?: string;
     fromEmail?: string;
+    status: "pending" | "paid" | "expired"; // Payment status
   };
   
     
     const [invoice, setInvoice] = useState<Invoice | null>(null);
 
     
-    useEffect(() => {
-      const fetchInvoice = async () => {
-        try {
-          const res = await fetch(
-            `https://solapay-backend.onrender.com/invoice/getbyid?${
-              invoiceId ? `invoiceId=${invoiceId}` : `reference=${reference}`
-            }`
-          );
-          const data = await res.json();
-          if (data.status === "paid") {
-            setInvoice(null); // or set a `paid` state
-            toast.error("Invoice already paid");
-          } else {
-            setInvoice(data);
-          }
-        } catch (err) {
-          console.error("Failed to load invoice", err);
-        } finally {
-          setLoading(false); // ✅ Stop loading regardless of result
-        }
-      };
+    // useEffect(() => {
+    //   const fetchInvoice = async () => {
+    //     try {
+    //       const res = await fetch(
+    //         `https://solapay-backend.onrender.com/invoice/getbyid?${
+    //           invoiceId ? `invoiceId=${invoiceId}` : `reference=${reference}`
+    //         }`
+    //       );
+    //       const data = await res.json();
+    //       if (data.status === "paid") {
+    //         setInvoice(null); // or set a `paid` state
+    //         toast.error("Invoice already paid");
+    //       } else {
+    //         setInvoice(data);
+    //       }
+    //     } catch (err) {
+    //       console.error("Failed to load invoice", err);
+    //     } finally {
+    //       setLoading(false); // ✅ Stop loading regardless of result
+    //     }
+    //   };
 
-        if (invoiceId || reference) {
-          fetchInvoice();
-        } else {
-          setLoading(false); // ✅ Stop loading if no invoiceId/reference
-        }
-    }, [invoiceId, reference]);
+    //     if (invoiceId || reference) {
+    //       fetchInvoice();
+    //     } else {
+    //       setLoading(false); // ✅ Stop loading if no invoiceId/reference
+    //     }
+    // }, [invoiceId, reference]);
 
+useEffect(() => {
+  const fetchInvoice = async () => {
+    try {
+      const res = await fetch(
+        `https://solapay-backend.onrender.com/invoice/getbyid?${
+          invoiceId ? `invoiceId=${invoiceId}` : `reference=${reference}`
+        }`
+      );
+
+      if (!res.ok) {
+        // If invoice not found (404) or error (500), handle gracefully
+        setInvoice(null);
+        toast.error("Invoice not found or already deleted.");
+        return;
+      }
+
+      const data = await res.json();
+
+      if (data.status === "paid") {
+        setInvoice(null); // ❌ prevent rendering QR etc.
+        toast.error("Invoice already paid");
+      } else {
+        setInvoice(data); // ✅ invoice is valid
+      }
+    } catch (err) {
+      console.error("Failed to load invoice", err);
+      toast.error("Something went wrong fetching the invoice.");
+      setInvoice(null); // fallback
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (invoiceId || reference) {
+    fetchInvoice();
+  } else {
+    setLoading(false);
+  }
+}, [invoiceId, reference]);
 
   interface SendDirectPaymentParams {
     connection: Connection;
@@ -376,39 +416,58 @@ export default function PaymentPage() {
       );
     }
       
-  return (
-    <div className="max-w-3xl mx-auto mt-16 p-4 space-y-6">
-      {/* Invoice Section */}
 
-      {!invoice ? (
-        <div className="text-center text-gray-500 font-semibold">
-          Invoice already paid or not found.
-        </div>
-      ) : (
-        // ) : invoice.fromEmail === user?.email ? (
-        //   <div className="text-center text-red-500 font-semibold">
-        //     You have not received any invoice
-        //   </div>
-        <div className=" rounded-4xl p-6 space-y-6 text-black bg-gray-950   shadow-[2px_2px_5px_#040f4c,-2px_-2px_5px_#040f4c] w-full">
-          <div className="flex items-center justify-between w-full flex-col md:flex-row gap-4">
-            <div className="flex items-center justify-center w-full">
-              {/* <Image
-                src="/logo4.svg"
-                alt="Picture of the logo"
-                className="mb-2"
-                width={40} //automatically provided
-                height={40} //automatically provided
-                // blurDataURL="data:..." automatically provided
-                // placeholder="blur" // Optional blur-up while loading
-              /> */}
-           
+  if (!invoice && !loading) {
+    return (
+      <div className="flex items-center justify-center mx-20 h-screen text-white bg-[#0B091A]">
+        <div className="text-center">
+          <div className="mb-8 flex items-center justify-center">
+            <div className="flex items-end-safe justify-items-end-safe">
               <Image
                 src="/logo4.svg"
                 alt="Picture of the logo"
                 width={40}
                 height={40}
-                  className="w-12 h-12 mb-5"
-                  priority
+                className="mb-1"
+              />
+              <h1 className="font-bold text-xl bg-gradient-to-tl from-[#9945ff] via-[#14f195] to-[#14f195] text-transparent bg-clip-text">
+                OLAPAY
+              </h1>
+            </div>
+          </div>
+          <h2 className="text-lg font-semibold">
+            Invoice not found, deleted, or already paid.
+          </h2>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-3xl mx-auto  p-4 space-y-6">
+      {/* Invoice Section */}
+
+      {/* {!invoice ? (
+        <div className="text-center text-gray-500 font-semibold">
+          Invoice already paid or not found.
+        </div>
+      ) : ( *}
+        // ) : invoice.fromEmail === user?.email ? (
+        //   <div className="text-center text-red-500 font-semibold">
+        //     You have not received any invoice
+        //   </div>*/}
+        <div className=" rounded-4xl p-6 space-y-6 text-black bg-gray-950  mt-16 shadow-[2px_2px_5px_#040f4c,-2px_-2px_5px_#040f4c] w-full">
+          <div className="flex items-center justify-between w-full flex-col md:flex-row gap-4">
+            <div className="flex items-center justify-center w-full">
+          
+
+              <Image
+                src="/logo4.svg"
+                alt="Picture of the logo"
+                width={40}
+                height={40}
+                className="w-12 h-12 mb-5"
+                priority
               />
 
               <h1 className="font-bold text-2xl bg-gradient-to-br from-[#9945ff] via-[#14f195] to-[#14f195] text-transparent bg-clip-text ">
@@ -427,6 +486,7 @@ export default function PaymentPage() {
 
               <p className="text-sm text-gray-600">{invoice?.description}</p>
               <p className="text-sm text-gray-500">Due: {invoice?.dueDate}</p>
+              
             </div>
           </div>
 
@@ -485,7 +545,7 @@ export default function PaymentPage() {
             </button>
           </div>
         </div>
-      )}
+      
     </div>
   );
 }

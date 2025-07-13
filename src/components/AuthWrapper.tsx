@@ -19,21 +19,27 @@ export default function AuthWrapper({
   const router = useRouter();
   const pathname = usePathname();
   const isAuth = pathname === "/Login";
-  const isPublic = pathname.startsWith("/Public-Pay");
+  // const isPublic = pathname.startsWith("/Public-Pay");
 
   // useEffect(() => {
   //   if (!loading && !user) {
   //     router.push("/Login");
   //   }
   // }, [loading, user, router]);
+  // useEffect(() => {
+  //   if (!loading && !user && !isAuth && !isPublic) {
+  //     router.replace("/Login"); // use replace to avoid extra history entry
+  //   }
+  // }, [loading, user, router, isAuth, isPublic]);
   useEffect(() => {
-    if (!loading && !user && !isAuth && !isPublic) {
-      router.replace("/Login"); // use replace to avoid extra history entry
+    if (!loading && !user && !isAuth) {
+      console.log("Redirecting to login...");
+      router.replace("/Login");
+      console.log("AuthWrapper running on", pathname);
     }
-  }, [loading, user, router, isAuth, isPublic]);
+  }, [loading, user, router, isAuth]);
 
-
-  if (loading || (!user && !isAuth && !isPublic)) {
+  if (loading) {
     // Or a spinner
     return (
       <div className="flex items-center justify-center h-screen bg-[#0B091A] text-white">
@@ -69,7 +75,7 @@ export default function AuthWrapper({
                 // blurDataURL="data:..." automatically provided
                 // placeholder="blur" // Optional blur-up while loading
               /> */}
-              <h1 className="font-bold text-xl dark:bg-gradient-to-tl from-[#9945ff]  via-[#14f195] to-[#14f195] dark:text-transparent bg-clip-text ">
+              <h1 className="font-bold text-xl bg-gradient-to-tl from-[#9945ff]  via-[#14f195] to-[#14f195] text-transparent bg-clip-text ">
                 OLAPAY
               </h1>
             </div>
@@ -78,14 +84,16 @@ export default function AuthWrapper({
       </div>
     );
   }
- 
 
+  // Unauthenticated & not on login → redirect
+  if (!user && !isAuth) {
+    
+    return null; // Don't render anything yet
+  }
   // User is authenticated, render children
   return (
     <div
-      className={`${
-       !isAuth  && user ? "lg:ml-[250px]" : "lg:ml-0 lg:mx-0"
-      } `}>
+      className={`${!isAuth && user ? "lg:ml-[250px]" : "lg:ml-0 lg:mx-0"} `}>
       {children}
     </div>
   );

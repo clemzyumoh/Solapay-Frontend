@@ -67,7 +67,7 @@ export default function NotificationTicker() {
 
   return (
     <div
-      className="h-[300px] lg:h-[400px] overflow-hidden  rounded-4xl flex justify-center items-center flex-col w-1/1 "
+      className="h-[300px] lg:h-[400px] overflow-hidden  rounded-4xl flex justify-center items-center flex-col w-1/1  "
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}>
       <h1 className="text-center font-bold text-2xl mb-5">Notifications</h1>
@@ -116,7 +116,7 @@ export default function NotificationTicker() {
                       />
                     </div>
 
-                    <div className="flex md:gap-3 justify-around items-center w-[90vw] md:w-[40vw] h-full ">
+                    <div className="flex md:gap-3 justify-around items-center w-[90vw] lg:w-[30vw] md:w-[45vw] h-full ">
                       <div className="flex justify-between items-center w-[15vw]   md:mr-0 h-full overflow-hidden">
                         {avatarUrl ? (
                           <div className="rounded-full border-[#14f195] border-2 w-12 h-12 ">

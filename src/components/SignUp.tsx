@@ -62,14 +62,11 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
 
       
 
-      // Redirect user
-      router.push("/");
-      
-
       // 👇 Fetch user details and set in context
       await getMe();
+      // Redirect to dashboard or home
+      router.push("/dashboard");
       toast.success("Login Successful.");
-      
     }  catch (err: unknown) {
       const errorMsg =
         err instanceof Error ? err.message : "Sign up failed. Please try again.";
@@ -83,7 +80,7 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
     loginWithGoogle();
     toast.success("Google Authetication.");
     await getMe(); // Fetch and set user first
-   router.push("/"); // Then redirect
+   router.push("/dashboard"); // Then redirect
    //toast.success("Login Successful.");
    
   };
@@ -91,7 +88,7 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
     loginWithDiscord();
     toast.success("Discord Authetication.");
     await getMe(); // Fetch and set user first
-    router.push("/"); // Then redirect
+    router.push("/dashboard"); // Then redirect
     //toast.success("Login Successful.");
 
   };

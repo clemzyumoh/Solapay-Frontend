@@ -24,9 +24,9 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
   const isPublicPay =
     pathname.startsWith("/Public-Pay") || pathname.startsWith("/public-pay");
-
+const isProtected = !isAuth && !isPublicPay;
   // ✅ special layout for public payment pages
-  if (isPublicPay || isAuth) {
+  if (isProtected) {
     //  console.log("PublicPay Layout detected");
     return (
       <div className="bg-[#0B091A] text-white min-h-screen h-full">

@@ -15,11 +15,20 @@ export default function AuthWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, loading } = useUser(); // Add loading to your UserContext!
+  const { user, loading , getMe} = useUser(); // Add loading to your UserContext!
   const router = useRouter();
   const pathname = usePathname();
   const isAuth = pathname === "/Login";
   
+
+  useEffect(() => {
+    // If no user, but not loading, try to fetch user (maybe cookie was just set)
+    if (!user && !loading) {
+      getMe();
+    }
+  }, [user, loading]);
+
+
   useEffect(() => {
     if (!loading && !user && !isAuth) {
       console.log("Redirecting to login...");
@@ -28,7 +37,7 @@ export default function AuthWrapper({
     }
   }, [loading, user, router, isAuth]);
 
-  if (loading) {
+  if (loading && !isAuth) {
     // Or a spinner
     return (
       <div className="flex items-center justify-center h-screen bg-[#0B091A] text-white">

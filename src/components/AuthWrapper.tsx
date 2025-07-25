@@ -19,18 +19,7 @@ export default function AuthWrapper({
   const router = useRouter();
   const pathname = usePathname();
   const isAuth = pathname === "/Login";
-  // const isPublic = pathname.startsWith("/Public-Pay");
-
-  // useEffect(() => {
-  //   if (!loading && !user) {
-  //     router.push("/Login");
-  //   }
-  // }, [loading, user, router]);
-  // useEffect(() => {
-  //   if (!loading && !user && !isAuth && !isPublic) {
-  //     router.replace("/Login"); // use replace to avoid extra history entry
-  //   }
-  // }, [loading, user, router, isAuth, isPublic]);
+  
   useEffect(() => {
     if (!loading && !user && !isAuth) {
       console.log("Redirecting to login...");

@@ -161,7 +161,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-20 md:mt-24 p-6 space-y-8 rounded-4xl  dark:bg-gray-950   bg-[#FFFFFF] shadow-[2px_2px_5px_#c0c5cc] dark:shadow-[2px_2px_5px_#040f4c,-2px_-2px_5px_#040f4c]">
+    <div className="max-w-3xl mx-auto mt-20 md:mt-24 p-6 mb-8 space-y-8 rounded-4xl  dark:bg-gray-950   bg-[#FFFFFF] shadow-[2px_2px_5px_#c0c5cc] dark:shadow-[2px_2px_5px_#040f4c,-2px_-2px_5px_#040f4c]">
       {/* Profile Image */}
       <div className="relative w-28 h-28 md:w-32 md:h-32 mx-auto">
         <input

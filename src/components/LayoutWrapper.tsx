@@ -19,33 +19,14 @@ import PageTracker from "./PageTracker";
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  // // ✅ app/public-pay/layout.tsx
-  // "use client";
-
-  // import { Toaster } from "react-hot-toast";
-  // import { Suspense } from "react";
-  // import SolanaProvider from "@/components/SolanaProvider";
-
-  // export default function PublicPayLayout({
-  //   children,
-  // }: {
-  //   children: React.ReactNode;
-  // }) {
-  //   return (
-  //     <div className="  bg-[#0B091A] text-white min-h-screen h-full">
-  //       <Toaster position="top-right" />
-  //       <Suspense>
-  //         <SolanaProvider>{children}</SolanaProvider>
-  //       </Suspense>
-  //     </div>
-  //   );
-  // }
+ 
+  const isAuth = pathname === "/Login";
 
   const isPublicPay =
     pathname.startsWith("/Public-Pay") || pathname.startsWith("/public-pay");
 
   // ✅ special layout for public payment pages
-  if (isPublicPay) {
+  if (isPublicPay || isAuth) {
     //  console.log("PublicPay Layout detected");
     return (
       <div className="bg-[#0B091A] text-white min-h-screen h-full">
@@ -57,7 +38,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
       </div>
     );
   }
-  const isAuth = pathname === "/Login";
+  
   //const isPublicPay = pathname === "/public-pay"; // ✅ Add this
 
   return (

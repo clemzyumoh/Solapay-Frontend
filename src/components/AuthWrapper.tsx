@@ -128,15 +128,15 @@ export default function AuthWrapper({
     console.log("AuthWrapper running on", pathname);
     console.log("User:", user);
     console.log("Loading:", loading);
-
+    if (!hasFetched) return; // ⛔ Don't run anything until user fetch is done
     // Redirect if finished loading AND user is not authenticated AND not on login page
-    if (hasFetched && !user && !isLoginPage) {
+    if (!user && !isLoginPage) {
       console.log("Redirecting to login...");
       router.replace("/Login");
     }
   }, [hasFetched, user, isLoginPage, router, pathname]);
 
-  if (loading) {
+  if (!hasFetched) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#0B091A] text-white">
         <div className="relative">

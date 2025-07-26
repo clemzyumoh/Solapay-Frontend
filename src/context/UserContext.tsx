@@ -82,18 +82,7 @@ useEffect(() => {
 }, []);
 
 
-//   // Optional: only try fetching user once on first load
-//   useEffect(() => {
-//      const isPublic = window.location.pathname.startsWith("/Public-Pay");
-//     if (!isPublic) {
-//       getMe();
-//     } // comment this out if you want full manual control
-//   }, []);
-// // useEffect(() => {
-// //   if (window.location.pathname.startsWith("/dashboard")) {
-// //     getMe(); // only fetch user for dashboard
-// //   }
-// // }, []);
+
 
   return (
     <UserContext.Provider value={{ user, loading, setUser, getMe , hasFetched}}>

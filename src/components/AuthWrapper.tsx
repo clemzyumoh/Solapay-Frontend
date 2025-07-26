@@ -15,7 +15,7 @@ export default function AuthWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, loading , getMe} = useUser(); // Add loading to your UserContext!
+  const { user, loading } = useUser(); // Add loading to your UserContext!
   const router = useRouter();
   const pathname = usePathname();
   const isAuth = pathname === "/Login";

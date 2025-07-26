@@ -45,15 +45,18 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  useEffect(() => {
-    const path = window.location.pathname;
-    const isPublic = path.startsWith("/Public-Pay") || path === "/Login";
-    if (!isPublic) {
-      getMe();
-    } else {
-      setLoading(false); // Skip fetching but end loading state
-    }
-  }, []);
+  // useEffect(() => {
+  //   const path = window.location.pathname;
+  //   const isPublic = path.startsWith("/Public-Pay") || path === "/Login";
+  //   if (!isPublic) {
+  //     getMe();
+  //   } else {
+  //     setLoading(false); // Skip fetching but end loading state
+  //   }
+  // }, []);
+useEffect(() => {
+  getMe(); // Always try
+}, []);
 
 
 //   // Optional: only try fetching user once on first load

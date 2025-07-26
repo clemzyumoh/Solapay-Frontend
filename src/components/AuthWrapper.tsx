@@ -27,6 +27,10 @@ export default function AuthWrapper({
   //     getMe();
   //   }
   // }, [user, loading]);
+useEffect(() => {
+  console.log("User:", user);
+  console.log("Loading:", loading);
+}, [user, loading]);
 
 
   useEffect(() => {

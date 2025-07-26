@@ -2,6 +2,8 @@
 
  import React, { createContext, useContext, useState, useEffect } from "react";
 // import Cookies from "js-cookie";
+import toast from "react-hot-toast";
+
  import axios from "axios";
 
 interface UserType {
@@ -79,6 +81,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   // }, []);
 useEffect(() => {
   getMe(); // Always try
+        toast.success("Login Successful.");
+  
 }, []);
 
 

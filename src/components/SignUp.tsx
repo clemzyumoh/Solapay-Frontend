@@ -9,7 +9,7 @@ import { registerUser } from "@/services/api"; // Register function
 import Cookies from "js-cookie"; // Set token
 import toast from "react-hot-toast";
 import {  loginWithDiscord, loginWithGoogle } from "@/services/api"; // Your login API function
-import { useUser } from "@/context/UserContext"; // 👈 import context
+
 
 
 interface SignUpProps {
@@ -24,7 +24,6 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
 
   const [error, setError] = useState("");
   const router = useRouter();
-    const { getMe } = useUser(); // 👈 get the function from context
   
 
   // Handle form submit (replace with actual signup logic later)
@@ -63,10 +62,10 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
       
 
       // 👇 Fetch user details and set in context
-      await getMe();
-      // Redirect to dashboard or home
-      router.push("/dashboard");
-      toast.success("Login Successful.");
+    
+    router.push("/dashboard");
+
+      
     }  catch (err: unknown) {
       const errorMsg =
         err instanceof Error ? err.message : "Sign up failed. Please try again.";
@@ -79,7 +78,7 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
  const handleGoogle = async () => {
     loginWithGoogle();
     toast.success("Google Authetication.");
-    await getMe(); // Fetch and set user first
+    
    router.push("/dashboard"); // Then redirect
    //toast.success("Login Successful.");
    
@@ -87,7 +86,7 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
   const handleDiscord = async () => {
     loginWithDiscord();
     toast.success("Discord Authetication.");
-    await getMe(); // Fetch and set user first
+  
     router.push("/dashboard"); // Then redirect
     //toast.success("Login Successful.");
 

@@ -17,6 +17,7 @@ interface UserContextType {
   loading: boolean;
   //setUser: (user: UserType | null) => void;
   getMe: () => Promise<void>;
+  hasFetched: boolean
 }
 
 
@@ -27,6 +28,8 @@ interface UserContextType {
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<UserType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [hasFetched, setHasFetched] = useState(false);
+
 
   const getMe = async () => {
     try {
@@ -44,6 +47,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(null); // ❗ important fallback
     } finally {
       setLoading(false); // ✅ done loading
+      setHasFetched(true); // ✅ important
     }
   };
 
@@ -92,7 +96,7 @@ useEffect(() => {
 // // }, []);
 
   return (
-    <UserContext.Provider value={{ user, loading, setUser, getMe }}>
+    <UserContext.Provider value={{ user, loading, setUser, getMe , hasFetched}}>
       {children}
     </UserContext.Provider>
   );

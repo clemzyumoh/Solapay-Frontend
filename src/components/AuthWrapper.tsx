@@ -118,7 +118,7 @@ export default function AuthWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, loading } = useUser();
+  const { user, loading, hasFetched } = useUser();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -130,11 +130,11 @@ export default function AuthWrapper({
     console.log("Loading:", loading);
 
     // Redirect if finished loading AND user is not authenticated AND not on login page
-    if (!loading && !user && !isLoginPage) {
+    if (hasFetched && !user && !isLoginPage) {
       console.log("Redirecting to login...");
       router.replace("/Login");
     }
-  }, [loading, user, isLoginPage, router, pathname]);
+  }, [hasFetched, user, isLoginPage, router, pathname]);
 
   if (loading) {
     return (

@@ -45,18 +45,29 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  // Optional: only try fetching user once on first load
   useEffect(() => {
-     const isPublic = window.location.pathname.startsWith("/Public-Pay");
+    const path = window.location.pathname;
+    const isPublic = path.startsWith("/Public-Pay") || path === "/Login";
     if (!isPublic) {
       getMe();
-    } // comment this out if you want full manual control
+    } else {
+      setLoading(false); // Skip fetching but end loading state
+    }
   }, []);
-// useEffect(() => {
-//   if (window.location.pathname.startsWith("/dashboard")) {
-//     getMe(); // only fetch user for dashboard
-//   }
-// }, []);
+
+
+//   // Optional: only try fetching user once on first load
+//   useEffect(() => {
+//      const isPublic = window.location.pathname.startsWith("/Public-Pay");
+//     if (!isPublic) {
+//       getMe();
+//     } // comment this out if you want full manual control
+//   }, []);
+// // useEffect(() => {
+// //   if (window.location.pathname.startsWith("/dashboard")) {
+// //     getMe(); // only fetch user for dashboard
+// //   }
+// // }, []);
 
   return (
     <UserContext.Provider value={{ user, loading, setUser, getMe }}>

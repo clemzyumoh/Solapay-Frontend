@@ -67,7 +67,7 @@ export default function LayoutWrapper({
         {isAuth ? (
           <main className="flex-grow w-full min-h-screen">
             <Toaster position="top-right" />
-            <InvoiceProvider>{children}</InvoiceProvider>
+            {children}
           </main>
         ) : (
           <AuthWrapper>

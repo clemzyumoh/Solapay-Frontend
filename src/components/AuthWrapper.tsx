@@ -21,12 +21,12 @@ export default function AuthWrapper({
   const isAuth = pathname === "/Login";
   
 
-  useEffect(() => {
-    // If no user, but not loading, try to fetch user (maybe cookie was just set)
-    if (!user && !loading) {
-      getMe();
-    }
-  }, [user, loading]);
+  // useEffect(() => {
+  //   // If no user, but not loading, try to fetch user (maybe cookie was just set)
+  //   if (!user && !loading) {
+  //     getMe();
+  //   }
+  // }, [user, loading]);
 
 
   useEffect(() => {

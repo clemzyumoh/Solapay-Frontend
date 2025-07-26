@@ -37,7 +37,7 @@ export default function AuthWrapper({
     }
   }, [loading, user, router, isAuth]);
 
-  if (loading && !isAuth) {
+  if (loading ) {
     // Or a spinner
     return (
       <div className="flex items-center justify-center h-screen bg-[#0B091A] text-white">

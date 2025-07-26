@@ -1,5 +1,3 @@
-
-
 // components/LayoutWrapper.tsx
 "use client";
 
@@ -17,16 +15,20 @@ import { UserProvider } from "@/context/UserContext";
 import { InvoiceProvider } from "@/context/InvoiceContext";
 import PageTracker from "./PageTracker";
 
-export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
+export default function LayoutWrapper({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
- 
+
   const isAuth = pathname === "/Login";
 
   const isPublicPay =
     pathname.startsWith("/Public-Pay") || pathname.startsWith("/public-pay");
-const isProtected = !isAuth && !isPublicPay;
+
   // ✅ special layout for public payment pages
-  if (isProtected) {
+  if (isPublicPay) {
     //  console.log("PublicPay Layout detected");
     return (
       <div className="bg-[#0B091A] text-white min-h-screen h-full">
@@ -38,7 +40,7 @@ const isProtected = !isAuth && !isPublicPay;
       </div>
     );
   }
-  
+
   //const isPublicPay = pathname === "/public-pay"; // ✅ Add this
 
   return (
@@ -47,7 +49,7 @@ const isProtected = !isAuth && !isPublicPay;
         isAuth ? "lg:ml-0  lg:mx-0" : ""
       }`}>
       <UserProvider>
-        <AuthWrapper>
+        {/* <AuthWrapper>
           <SolanaProvider>
             <ThemeProvider>
               <PageTracker />
@@ -61,9 +63,30 @@ const isProtected = !isAuth && !isPublicPay;
               {!isAuth && <Footer />}
             </ThemeProvider>
           </SolanaProvider>
-        </AuthWrapper>
+        </AuthWrapper> */}
+        {isAuth ? (
+          <main className="flex-grow w-full min-h-screen">
+            <Toaster position="top-right" />
+            <InvoiceProvider>{children}</InvoiceProvider>
+          </main>
+        ) : (
+          <AuthWrapper>
+            <SolanaProvider>
+              <ThemeProvider>
+                <PageTracker />
+                <Header />
+                <Sidebar />
+                <main className="flex-grow w-full min-h-screen">
+                  <Toaster position="top-right" />
+                  <InvoiceProvider>{children}</InvoiceProvider>
+                </main>
+                <Navigation />
+                <Footer />
+              </ThemeProvider>
+            </SolanaProvider>
+          </AuthWrapper>
+        )}
       </UserProvider>
     </div>
   );
 }
-

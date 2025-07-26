@@ -113,6 +113,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import Image from "next/image";
 
+
 export default function AuthWrapper({
   children,
 }: {
@@ -125,16 +126,17 @@ export default function AuthWrapper({
   const isLoginPage = pathname === "/Login";
 
   useEffect(() => {
+     
     console.log("AuthWrapper running on", pathname);
     console.log("User:", user);
     console.log("Loading:", loading);
-    if (!hasFetched) return; // ⛔ Don't run anything until user fetch is done
+    if (!hasFetched) return ; // ⛔ Don't run anything until user fetch is done
     // Redirect if finished loading AND user is not authenticated AND not on login page
-    if (!user && !isLoginPage) {
+    if (!user ) {
       console.log("Redirecting to login...");
       router.replace("/Login");
     }
-  }, [hasFetched, user, isLoginPage, router, pathname]);
+  }, [hasFetched, user,  router]);
 
   if (!hasFetched) {
     return (

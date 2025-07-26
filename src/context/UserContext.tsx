@@ -2,7 +2,7 @@
 
  import React, { createContext, useContext, useState, useEffect } from "react";
 // import Cookies from "js-cookie";
-import toast from "react-hot-toast";
+//import toast from "react-hot-toast";
 
  import axios from "axios";
 
@@ -31,6 +31,27 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<UserType | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasFetched, setHasFetched] = useState(false);
+
+// useEffect(() => {
+//   const fetchUser = async () => {
+//     try {
+//     const res = await axios.get(
+//       "https://solapay-backend.onrender.com/auth/me",
+//       {
+//         withCredentials: true,
+//       }
+//     );
+
+//       setUser(res.data.user);
+//     } catch (err) {
+//       setUser(null); // not authenticated
+//     } finally {
+//       setHasFetched(true); // ✅ this must be set only after user is known
+//     }
+//   };
+
+//   fetchUser();
+// }, []);
 
 
   const getMe = async () => {
@@ -70,18 +91,20 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   //   }
   // };
 
-  // useEffect(() => {
-  //   const path = window.location.pathname;
-  //   const isPublic = path.startsWith("/Public-Pay") || path === "/Login";
-  //   if (!isPublic) {
-  //     getMe();
-  //   } else {
-  //     setLoading(false); // Skip fetching but end loading state
-  //   }
-  // }, []);
+  useEffect(() => {
+    const path = window.location.pathname;
+    const isPublic = path.startsWith("/Public-Pay") || path === "/Login";
+    if (!isPublic) {
+      getMe();
+    } else {
+      setLoading(false); // Skip fetching but end loading state
+    }
+  }, []);
+
+  
 useEffect(() => {
   getMe(); // Always try
-        toast.success("Login Successful.");
+        //toast.success("Login Successful.");
   
 }, []);
 
@@ -89,7 +112,7 @@ useEffect(() => {
 
 
   return (
-    <UserContext.Provider value={{ user, loading, setUser, getMe , hasFetched}}>
+    <UserContext.Provider value={{ user, loading, setUser,getMe,  hasFetched}}>
       {children}
     </UserContext.Provider>
   );

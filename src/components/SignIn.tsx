@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation"; // Router for programmatic navigati
 import { loginUser, loginWithDiscord, loginWithGoogle } from "@/services/api"; // Your login API function
 import Cookies from "js-cookie"; // To store JWT token in cookies
 import toast from "react-hot-toast";
-
+import { useUser } from "@/context/UserContext"; // 👈 import context
 
 interface SignInProps {
   onSwitchToSignUp: () => void; // function prop to toggle to Sign Up
@@ -26,20 +26,20 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
   // Router instance for redirecting after login
   const router = useRouter();
 
-  
+  const { getMe } = useUser(); // 👈 get the function from
 
 
   const handleGoogle = async () => {
     loginWithGoogle();
     toast.success("Google Authetication.");
-    
+    await getMe(); // Fetch and set user first
     router.push("/dashboard"); // Then redirect
    
   };
   const handleDiscord = async () => {
     loginWithDiscord();
     toast.success("Discord Authetication.");
-
+    await getMe(); // Fetch and set user first
     router.push("/dashboard"); // Then redirect
    
   };
@@ -57,11 +57,11 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
       Cookies.set("token", response.token);
 
 
-   
-
+      // 👇 Fetch user details and set in context
+      await getMe();
       // Redirect to dashboard or home
       router.push("/dashboard");
-      
+      toast.success("Login Successful.");
     } catch (err: unknown) {
       const errorMsg =
         err instanceof Error ? err.message : "Login failed. Please try again.";

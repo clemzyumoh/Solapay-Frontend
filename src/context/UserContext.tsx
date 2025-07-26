@@ -30,20 +30,39 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const getMe = async () => {
     try {
-      const response = await axios.get(
+      const res = await axios.get(
         "https://solapay-backend.onrender.com/auth/me",
+
         {
           withCredentials: true,
         }
       );
-      setUser(response.data.user);
-      console.log("Fetched user:", response.data.user);
-    } catch {
-      setUser(null);
+      console.log("Fetched user:", res.data);
+      setUser(res.data.user); // ✅ set user
+    } catch (error) {
+      console.error("Error fetching user", error);
+      setUser(null); // ❗ important fallback
     } finally {
-      setLoading(false);
+      setLoading(false); // ✅ done loading
     }
   };
+
+  // const getMe = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "https://solapay-backend.onrender.com/auth/me",
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     );
+  //     setUser(response.data.user);
+  //     console.log("Fetched user:", response.data.user);
+  //   } catch {
+  //     setUser(null);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   // useEffect(() => {
   //   const path = window.location.pathname;

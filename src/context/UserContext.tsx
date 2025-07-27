@@ -98,9 +98,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       getMe();
     } else {
       setLoading(false); // Skip fetching but end loading state
-         setHasFetched(true); 
+      setHasFetched(true);
     }
-  }, []);
+  }, [window.location.pathname]);
 
   
 

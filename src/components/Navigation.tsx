@@ -16,8 +16,8 @@ const Navigation = () => {
 
   const Menus = [
     {
-      href: "/",
-      label: "Dashboard",
+      href: "/dashboard",
+      label: "dashboard",
       icon: <IoHomeOutline />,
       disabled: false,
     },

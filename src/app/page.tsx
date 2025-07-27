@@ -280,8 +280,27 @@
 //     </main>
 //   );
 // }
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
+
+// export default function Home() {
+//   redirect("/dashboard");
+//}
+// app/page.tsx
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/context/UserContext";
 
 export default function Home() {
-  redirect("/dashboard");
+  const { user } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/dashboard");
+    }
+  }, [user]);
+
+  return null; // Or a loading spinner if you prefer
 }
+

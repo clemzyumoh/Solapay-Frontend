@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // Define routes that don't require authentication
-const PUBLIC_ROUTES = ["/Login", "/register", "/api","/Public-Pay"];
+const PUBLIC_ROUTES = ["/Login", "/auth-redirect", "/api", "/Public-Pay"];
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;

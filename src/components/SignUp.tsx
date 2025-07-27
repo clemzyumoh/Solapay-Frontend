@@ -9,7 +9,7 @@ import { registerUser } from "@/services/api"; // Register function
 import Cookies from "js-cookie"; // Set token
 import toast from "react-hot-toast";
 import {  loginWithDiscord, loginWithGoogle } from "@/services/api"; // Your login API function
-import { useUser } from "@/context/UserContext"; // 👈 import context
+//import { useUser } from "@/context/UserContext"; // 👈 import context
 
 
 interface SignUpProps {
@@ -24,7 +24,7 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
 
   const [error, setError] = useState("");
   const router = useRouter();
-    const { getMe } = useUser(); // 👈 get the function from context
+   // const { getMe } = useUser(); // 👈 get the function from context
   
 
   // Handle form submit (replace with actual signup logic later)
@@ -63,9 +63,9 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
       
 
       // 👇 Fetch user details and set in context
-      await getMe();
+     // await getMe();
       // Redirect to dashboard or home
-      router.push("/dashboard");
+      router.push("/auth-redirect");
       toast.success("Login Successful.");
     }  catch (err: unknown) {
       const errorMsg =

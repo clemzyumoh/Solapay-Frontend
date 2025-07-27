@@ -56,23 +56,18 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
 
-  // useEffect(() => {
-  //   const path = window.location.pathname;
-  //   const isPublic =  path === "/Login";
-  //   if (!isPublic) {
-  //     getMe();
-  //   } else {
-  //     setLoading(false); // Skip fetching but end loading state
-  //     setHasFetched(true);
-  //   }
-  // }, [window.location.pathname]);
+  useEffect(() => {
+   
+      getMe();
+ 
+  }, []);
 
   useEffect(() => {
     const path = window.location.pathname;
     const isPublic = path === "/Login";
 
     if (isPublic) {
-      setLoading(false);
+    
       setHasFetched(true);
       return;
     }

@@ -56,14 +56,14 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
 
-  useEffect(() => {
+  // useEffect(() => {
    
-      getMe();
+  //     getMe();
  
-  }, []);
+  // }, []);
 
   useEffect(() => {
-    const path = window.location.pathname;
+    const path = typeof window !== "undefined" ? window.location.pathname : "";
     const isPublic = path === "/Login";
 
     if (isPublic) {
@@ -99,7 +99,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     fetchUserWithRetry();
-  }, [window.location.pathname]);
+  }, [user]);
 
 
 

@@ -56,53 +56,51 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
 
+  
+
   // useEffect(() => {
-   
-  //     getMe();
- 
-  // }, []);
+  //   const path = typeof window !== "undefined" ? window.location.pathname : "";
+  //   const isPublic = path === "/Login";
 
-  useEffect(() => {
-    const path = typeof window !== "undefined" ? window.location.pathname : "";
-    const isPublic = path === "/Login";
-
-    if (isPublic) {
+  //   if (isPublic) {
     
-      setHasFetched(true);
-      return;
-    }
+  //     setHasFetched(true);
+  //     return;
+  //   }
 
-    let retries = 0;
-    const maxRetries = 5;
+  //   let retries = 0;
+  //   const maxRetries = 5;
 
-    const fetchUserWithRetry = async () => {
-      try {
-        await getMe();
-        if (user) {
-          setHasFetched(true);
-        } else if (retries < maxRetries) {
-          retries++;
-          setTimeout(fetchUserWithRetry, 1000); // retry after 1s
-        } else {
-          setHasFetched(true);
-          setLoading(false);
-        }
-      } catch {
-        if (retries < maxRetries) {
-          retries++;
-          setTimeout(fetchUserWithRetry, 1000);
-        } else {
-          setHasFetched(true);
-          setLoading(false);
-        }
-      }
-    };
+  //   const fetchUserWithRetry = async () => {
+  //     try {
+  //       await getMe();
+  //       if (user) {
+  //         setHasFetched(true);
+  //       } else if (retries < maxRetries) {
+  //         retries++;
+  //         setTimeout(fetchUserWithRetry, 1000); // retry after 1s
+  //       } else {
+  //         setHasFetched(true);
+  //         setLoading(false);
+  //       }
+  //     } catch {
+  //       if (retries < maxRetries) {
+  //         retries++;
+  //         setTimeout(fetchUserWithRetry, 1000);
+  //       } else {
+  //         setHasFetched(true);
+  //         setLoading(false);
+  //       }
+  //     }
+  //   };
 
-    fetchUserWithRetry();
-  }, [user]);
+  //   fetchUserWithRetry();
+  // }, [user]);
 
 
-
+useEffect(() => {
+ getMe()
+}, []);
 
 
 

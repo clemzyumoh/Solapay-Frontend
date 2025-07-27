@@ -38,8 +38,6 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
   const handleDiscord = async () => {
     loginWithDiscord();
     toast.success("Discord Authetication.");
-
-   
   };
  
 

@@ -22,7 +22,7 @@ export default function LayoutWrapper({
 }) {
   const pathname = usePathname();
 
-  const isAuth = pathname === "/Login";
+  const isAuth = pathname === "/auth-redirect" || pathname === "/Login";
 
   const isPublicPay =
     pathname.startsWith("/Public-Pay") || pathname.startsWith("/public-pay");

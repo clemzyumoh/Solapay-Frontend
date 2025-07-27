@@ -32,15 +32,13 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
   const handleGoogle = async () => {
     loginWithGoogle();
     toast.success("Google Authetication.");
-    await getMe(); // Fetch and set user first
-    router.push("/dashboard"); // Then redirect
+   
    
   };
   const handleDiscord = async () => {
     loginWithDiscord();
     toast.success("Discord Authetication.");
-    await getMe(); // Fetch and set user first
-    router.push("/dashboard"); // Then redirect
+
    
   };
  

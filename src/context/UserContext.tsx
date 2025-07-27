@@ -32,26 +32,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
   const [hasFetched, setHasFetched] = useState(false);
 
-// useEffect(() => {
-//   const fetchUser = async () => {
-//     try {
-//     const res = await axios.get(
-//       "https://solapay-backend.onrender.com/auth/me",
-//       {
-//         withCredentials: true,
-//       }
-//     );
 
-//       setUser(res.data.user);
-//     } catch (err) {
-//       setUser(null); // not authenticated
-//     } finally {
-//       setHasFetched(true); // ✅ this must be set only after user is known
-//     }
-//   };
-
-//   fetchUser();
-// }, []);
 
 
   const getMe = async () => {
@@ -74,35 +55,57 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  // const getMe = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       "https://solapay-backend.onrender.com/auth/me",
-  //       {
-  //         withCredentials: true,
-  //       }
-  //     );
-  //     setUser(response.data.user);
-  //     console.log("Fetched user:", response.data.user);
-  //   } catch {
-  //     setUser(null);
-  //   } finally {
-  //     setLoading(false);
+
+  // useEffect(() => {
+  //   const path = window.location.pathname;
+  //   const isPublic =  path === "/Login";
+  //   if (!isPublic) {
+  //     getMe();
+  //   } else {
+  //     setLoading(false); // Skip fetching but end loading state
+  //     setHasFetched(true);
   //   }
-  // };
+  // }, [window.location.pathname]);
 
   useEffect(() => {
     const path = window.location.pathname;
-    const isPublic = path.startsWith("/Public-Pay") || path === "/Login";
-    if (!isPublic) {
-      getMe();
-    } else {
-      setLoading(false); // Skip fetching but end loading state
+    const isPublic = path === "/Login";
+
+    if (isPublic) {
+      setLoading(false);
       setHasFetched(true);
+      return;
     }
+
+    let retries = 0;
+    const maxRetries = 5;
+
+    const fetchUserWithRetry = async () => {
+      try {
+        await getMe();
+        if (user) {
+          setHasFetched(true);
+        } else if (retries < maxRetries) {
+          retries++;
+          setTimeout(fetchUserWithRetry, 1000); // retry after 1s
+        } else {
+          setHasFetched(true);
+          setLoading(false);
+        }
+      } catch {
+        if (retries < maxRetries) {
+          retries++;
+          setTimeout(fetchUserWithRetry, 1000);
+        } else {
+          setHasFetched(true);
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchUserWithRetry();
   }, [window.location.pathname]);
 
-  
 
 
 

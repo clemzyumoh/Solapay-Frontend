@@ -98,21 +98,11 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       getMe();
     } else {
       setLoading(false); // Skip fetching but end loading state
+         setHasFetched(true); 
     }
   }, []);
 
   
-useEffect(() => {
-  if (typeof window === "undefined") return;
-
-  const isLoginPage = window.location.pathname === "/Login";
-  const isPublicPage = window.location.pathname.startsWith("/Public-Pay");
-
-  // ⛔ only redirect if not logged in & not on public or login pages
-  if (hasFetched && !user && !isLoginPage && !isPublicPage) {
-    window.location.href = "/Login";
-  }
-}, [hasFetched, user]);
 
 
 

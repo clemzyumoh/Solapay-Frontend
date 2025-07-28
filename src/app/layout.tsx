@@ -38,7 +38,7 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${sora.variable} antialiased`}>
   
 
-      <body className="min-h-screen flex flex-col text-black dark:text-white dark:bg-[#0B091A] bg-[#E3EEFF]">
+      <body className="min-h-screen flex flex-col text-black dark:text-white bg-[#0B091A] ">
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>

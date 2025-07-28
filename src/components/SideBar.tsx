@@ -67,7 +67,7 @@ const Sidebar = () => {
       <nav className="space-y-4 mt-16 font-bold w-full">
         {[
           {
-            href: "/",
+            href: "/dashboard",
             label: "Dashboard",
             icon: <IoHomeOutline />,
             disabled: false,

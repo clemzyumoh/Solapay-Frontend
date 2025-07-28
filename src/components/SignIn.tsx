@@ -49,16 +49,15 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
 
     try {
       // Call your loginUser API function
-      await loginUser({ email, password });
-
+       await loginUser({ email, password });
+      // Store token in localStorage (fallback for middleware)
+     // localStorage.setItem("token", res.token); // Assuming token is in response
       // If login is successful, set token in cookies
       //Cookies.set("token", response.token);
 
-
-   
       // Redirect to dashboard or home
       router.push("/auth-redirect");
-     // toast.success("Login Successful.");
+      // toast.success("Login Successful.");
     } catch (err: unknown) {
       const errorMsg =
         err instanceof Error ? err.message : "Login failed. Please try again.";

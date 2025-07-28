@@ -5,33 +5,60 @@
 import { usePathname } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import Image from "next/image";
-
+import { useEffect , useState} from "react";
+import { useRouter } from "next/navigation"; // ✅ Correct for `app/` directory
 
 export default function AuthWrapper({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { user, loading} = useUser();
-  //const router = useRouter();
+  const { user, loading, hasFetched} = useUser();
+  const router = useRouter();
   const pathname = usePathname();
+    const [redirecting, setRedirecting] = useState(true); // show spinner until redirected
+  
 
   const isLoginPage = pathname === "/Login";
 
-  // useEffect(() => {
+  useEffect(() => {
      
-  //   console.log("AuthWrapper running on", pathname);
-  //   console.log("User:", user);
-  //   console.log("Loading:", loading);
-  //   if (!hasFetched) return ; // ⛔ Don't run anything until user fetch is done
-  //   // Redirect if finished loading AND user is not authenticated AND not on login page
-  //   if (!user ) {
-  //     console.log("Redirecting to login...");
-  //     router.replace("/Login");
-  //   }
-  // }, [hasFetched, user,  router]);
+    console.log("AuthWrapper running on", pathname);
+    console.log("User:", user);
+    console.log("Loading:", loading);
+    if (!hasFetched) return ; // ⛔ Don't run anything until user fetch is done
+    // Redirect if finished loading AND user is not authenticated AND not on login page
+    if (!user ) {
+      console.log("Redirecting to login...");
+      
+      
 
-  if (loading) {
+      router.push("/Login");
+     // setRedirecting(false);
+
+    }
+  }, [hasFetched, user,  router]);
+
+
+//   useEffect(() => {
+//   if (!hasFetched) return;
+
+//   // ✅ Prevent redirect loop on /auth-redirect
+//   if (!user && pathname !== "/auth-redirect") {
+//     router.replace("/Login");
+//   }
+// }, [hasFetched, user, router, pathname]);
+
+
+
+    useEffect(() => {
+    if (router && window.location.pathname !== "/Login") {
+      setRedirecting(false);
+        }
+        
+  }, [router]);
+
+  if (redirecting) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#0B091A] text-white">
         <div className="relative">

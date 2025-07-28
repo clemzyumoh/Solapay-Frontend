@@ -9,7 +9,7 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 
 export default function AuthRedirect() {
-  const { user,  hasFetched, getMe } = useUser();
+  const { user,   getMe } = useUser();
   const router = useRouter();
  // const [checking, setChecking] = useState(true);
 const [hasRedirected, setHasRedirected] = useState(false);
@@ -101,22 +101,25 @@ const [hasRedirected, setHasRedirected] = useState(false);
   // When route changes away from /auth-redirect, hide spinnera
 
 useEffect(() => {
-  if (hasFetched && !hasRedirected) {
+  if ( !hasRedirected && user) {
     const redirectAfterDelay = async () => {
-      //   await new Promise((res) => setTimeout(res, 1000)); // wait for 3 seconds
+        await new Promise((res) => setTimeout(res, 2000)); // wait for 3 seconds
       setHasRedirected(true); // prevent future triggers
-      if (user) {
-        router.replace("/dashboard");
+        if (user) {
+          console.log("user", user)
+          // router.replace("/dashboard");
+          router.push(`/dashboard`);
         toast.success("Login Successful.");
       } else {
         router.replace("/Login");
         toast.error("Login Unsuccessful.");
-      }
+        }
+        
     };
 
     redirectAfterDelay(); // run the redirect with delay
   }
-}, [user, hasFetched, hasRedirected]);
+}, [user]);
     
    
 

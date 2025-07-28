@@ -38,14 +38,14 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const getMe = async () => {
     try {
       const res = await axios.get(
-       "https://solapay-backend.onrender.com/auth/me"
-       // "http://localhost:5000/auth/me"
-        ,
-
+        "https://solapay-backend.onrender.com/auth/me",
+        // "http://localhost:5000/auth/me"
         {
           withCredentials: true,
         }
       );
+      // Store token in localStorage (fallback for middleware)
+     // localStorage.setItem("token", res.token); // Assuming token is in response
       console.log("Fetched user:", res.data);
       setUser(res.data.user); // ✅ set user
     } catch (error) {

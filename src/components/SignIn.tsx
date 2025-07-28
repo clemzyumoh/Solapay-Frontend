@@ -49,7 +49,7 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
 
     try {
       // Call your loginUser API function
-      const response = await loginUser({ email, password });
+     // const response = await loginUser({ email, password });
 
       // If login is successful, set token in cookies
       //Cookies.set("token", response.token);

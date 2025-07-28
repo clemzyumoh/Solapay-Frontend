@@ -55,7 +55,7 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
 
     try {
       // Call your API to register
-      const response = await registerUser({ name, email, password });
+     // const response = await registerUser({ name, email, password });
 
       // Save token in cookie (if returned immediately)
      // Cookies.set("token", response.token);

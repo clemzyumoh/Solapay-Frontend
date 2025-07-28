@@ -175,7 +175,7 @@ export default function SettingsPage() {
           <div className="w-28 h-28 md:w-32 md:h-32 rounded-full  flex items-center justify-center dark:bg-gray-950   bg-[#FFFFFF] shadow-[2px_2px_5px_#c0c5cc] dark:shadow-[2px_2px_5px_#040f4c,-2px_-2px_5px_#040f4c]">
             <RxAvatar className="w-full h-full" />
           </div>
-        ) : user ? (
+        ) : user && (user.imageUrl || tempImageUrl) ? (
           <img
             // src={user.imageUrl}
             src={tempImageUrl || user.imageUrl || "/default-avatar.png"} // 👈 preview immediately
@@ -224,11 +224,7 @@ export default function SettingsPage() {
             </div>
           )}
         </div>
-
-       
       </div>
-
-   
 
       <div>
         <h2 className="text-xl font-semibold mb-2 flex justify-between w-full items-center gap-2">
@@ -257,8 +253,6 @@ export default function SettingsPage() {
           </div>
         </h2>
       </div>
-
-    
 
       {/* Social Links */}
       <div className="flex gap-6 justify-between w-full items-center mt-8">

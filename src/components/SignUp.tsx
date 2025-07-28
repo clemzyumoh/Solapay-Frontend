@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaDiscord } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/services/api"; // Register function
-import Cookies from "js-cookie"; // Set token
+//import Cookies from "js-cookie"; // Set token
 import toast from "react-hot-toast";
 import {  loginWithDiscord, loginWithGoogle } from "@/services/api"; // Your login API function
 //import { useUser } from "@/context/UserContext"; // 👈 import context
@@ -58,7 +58,7 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
       const response = await registerUser({ name, email, password });
 
       // Save token in cookie (if returned immediately)
-      Cookies.set("token", response.token);
+     // Cookies.set("token", response.token);
 
       
 
@@ -66,7 +66,7 @@ export default function SignUp({ onSwitchToSignIn }: SignUpProps) {
      // await getMe();
       // Redirect to dashboard or home
       router.push("/auth-redirect");
-      toast.success("Login Successful.");
+     // toast.success("Login Successful.");
     }  catch (err: unknown) {
       const errorMsg =
         err instanceof Error ? err.message : "Sign up failed. Please try again.";

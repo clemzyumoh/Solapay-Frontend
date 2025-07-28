@@ -6,11 +6,13 @@ const PUBLIC_ROUTES = ["/Login", "/auth-redirect", "/api", "/Public-Pay"];
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const pathname = request.nextUrl.pathname;
-
+  //console.log("🍪 Token in middleware:", token); // debug
   const isPublic = PUBLIC_ROUTES.some((path) => pathname.startsWith(path));
 
   if (!token && !isPublic) {
     const loginUrl = new URL("/Login", request.url);
+    console.log("🍪 Token in middleware:", token); // debug
+
     return NextResponse.redirect(loginUrl);
   }
 

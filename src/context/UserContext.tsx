@@ -38,7 +38,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const getMe = async () => {
     try {
       const res = await axios.get(
-        "https://solapay-backend.onrender.com/auth/me",
+       // "https://solapay-backend.onrender.com/auth/me"
+        "http://localhost:5000/auth/me"
+        ,
 
         {
           withCredentials: true,
@@ -104,6 +106,12 @@ useEffect(() => {
 
 
 
+  // useEffect(() => {
+  //   if (window.location.pathname === "/auth-redirect") {
+  //     getMe();
+  //   }
+  // }, []);
+  
   return (
     <UserContext.Provider value={{ user, loading, setUser,getMe,  hasFetched}}>
       {children}

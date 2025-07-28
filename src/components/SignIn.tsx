@@ -7,7 +7,7 @@ import { FaDiscord } from "react-icons/fa";
 
 import { useRouter } from "next/navigation"; // Router for programmatic navigation
 import { loginUser, loginWithDiscord, loginWithGoogle } from "@/services/api"; // Your login API function
-import Cookies from "js-cookie"; // To store JWT token in cookies
+//import Cookies from "js-cookie"; // To store JWT token in cookies
 import toast from "react-hot-toast";
 //import { useUser } from "@/context/UserContext"; // 👈 import context
 
@@ -38,6 +38,8 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
   const handleDiscord = async () => {
     loginWithDiscord();
     toast.success("Discord Authetication.");
+    
+   // Cookies.set("token", Response.token);
   };
  
 
@@ -50,13 +52,13 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
       const response = await loginUser({ email, password });
 
       // If login is successful, set token in cookies
-      Cookies.set("token", response.token);
+      //Cookies.set("token", response.token);
 
 
    
       // Redirect to dashboard or home
       router.push("/auth-redirect");
-      toast.success("Login Successful.");
+     // toast.success("Login Successful.");
     } catch (err: unknown) {
       const errorMsg =
         err instanceof Error ? err.message : "Login failed. Please try again.";
@@ -64,6 +66,9 @@ export default function SignIn({ onSwitchToSignUp }: SignInProps) {
       toast.error(errorMsg);
     }
   };
+
+
+
   return (
     <div className="flex flex-col justify-center  items-center w-full">
       <h2>Sign In</h2>

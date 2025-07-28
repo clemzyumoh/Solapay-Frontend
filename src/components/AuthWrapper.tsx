@@ -12,7 +12,7 @@ export default function AuthWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, hasFetched } = useUser();
+  const { user, loading} = useUser();
   //const router = useRouter();
   const pathname = usePathname();
 
@@ -31,7 +31,7 @@ export default function AuthWrapper({
   //   }
   // }, [hasFetched, user,  router]);
 
-  if (!hasFetched) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#0B091A] text-white">
         <div className="relative">

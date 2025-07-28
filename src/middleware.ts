@@ -32,6 +32,7 @@ import { NextRequest, NextResponse } from "next/server";
 // export const config = {
 //   matcher: ["/((?!_next|favicon.ico|logo|fonts|images).*)"],
 // };
-export default function middleware(_request: NextRequest) {
+export default function middleware(request: NextRequest) {
+  console.log(request.nextUrl.pathname); // use it somehow
   return NextResponse.next();
 }
